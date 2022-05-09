@@ -1,0 +1,25 @@
+{
+  "name": "guesslist-website",
+  "version": "1.0.0",
+  "description": "",
+  "source": "src/index.html",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.3",
+    "@types/styled-components": "^5.1.25",
+    "parcel": "^2.5.0"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "styled-components": "^5.3.5"
+  }
+}
