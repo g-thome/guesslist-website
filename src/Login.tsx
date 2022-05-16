@@ -2,6 +2,11 @@ import DiscordLogo from './images/discord-logo.svg';
 import styled from 'styled-components';
 import { purple, white } from './colors';
 
+
+function goToAuth() {
+  window.location.href = 'https://discord.com/api/oauth2/authorize?client_id=975659450620858418&response_type=token&scope=identify';
+}
+
 const Logo = styled.img`
     width: 100%;
     max-width: 200px;
@@ -33,7 +38,7 @@ export function Login() {
     return (
         <Centralized>
             <Logo src={DiscordLogo} alt="discord"></Logo>
-            <LoginButton>LOGIN WITH DISCORD</LoginButton>
+            <LoginButton onClick={goToAuth}>LOGIN WITH DISCORD</LoginButton>
         </Centralized>
     )
 }
