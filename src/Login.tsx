@@ -34,7 +34,6 @@ const Centralized = styled.div`
 `;
 
 export function Login() {
-    const logo = new URL('./images/discord-logo.svg', import.meta.url);
     return (
         <Centralized>
             <Logo src={DiscordLogo} alt="discord"></Logo>
