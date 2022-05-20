@@ -5,8 +5,9 @@ import { loadUserInfo, saveAuthorizationToLocalStorage } from './userInfo';
 
 export function App() {
     const authorizationExpireDate = localStorage.getItem('expire_date');
-    
-    if (authorizationExpireDate && new Date(authorizationExpireDate) < new Date()) {
+    const isAuthorizationInURL = window.location.href.includes('access_token');
+
+    if ((authorizationExpireDate && new Date(authorizationExpireDate) < new Date()) || !isAuthorizationInURL && !authorizationExpireDate) {
         localStorage.clear();
         return <Login />;
     }
