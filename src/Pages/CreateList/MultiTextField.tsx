@@ -1,36 +1,12 @@
-import { useState, KeyboardEvent, useEffect } from "react";
-import styled from "styled-components"
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { white, arsenic, gray } from "../colors";
-import { UserPlate } from "../components/UserPlate";
-import { keygen } from "../keygen";
+import { useState, useEffect, KeyboardEvent } from "react";
+import styled from "styled-components";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { gray } from "../../colors";
+import { keygen } from "../../keygen";
+import { StyledLabel } from "./StyledLabel";
+import { StyledInput } from "./StyledInput";
 
-const StyledLabel = styled.span`
-    color: ${white};
-    font-size: 35px;
-`;
-
-const StyledInput = styled.input`
-        margin-top: 0.5em;
-        padding: 0.5em 1em;
-        width: 100%;
-        border: none;
-        border-radius: 10px;
-        background-color: ${arsenic};
-        outline: none;
-        color: ${white};
-        font-size: 25px;
-`;
-
-function TextField({ label }) {
-    return (
-        <label>
-            <StyledLabel>{label}</StyledLabel>
-            <StyledInput type="text" placeholder="Enter list name" />
-        </label>           
-    )
-}
-const AddFieldButton = styled(AddCircleIcon)`
+export const AddFieldButton = styled(AddCircleIcon)`
         margin-top: 0.3em;
         width: 2rem;
         height: 2rem;
@@ -41,7 +17,7 @@ const AddFieldButton = styled(AddCircleIcon)`
         }
 `;
 
-function MultiTextField({ label }) {
+export function MultiTextField({ label }) {
     interface IItemListItem {
         text: string;
         itemId: string;
@@ -80,26 +56,5 @@ function MultiTextField({ label }) {
             })}
             <AddFieldButton fontSize="large" onClick={addField}  />
         </label> 
-    )
-}
-
-const PageName = styled.h1`
-        color: ${white};
-        font-weight: bold;
-        font-size: 48px;
-    `;
-
-export function CreateList() {
-    return (
-        <main style={{padding: '1rem 2rem'}}>
-            <UserPlate />
-            <PageName>
-                Create your first list!
-            </PageName>
-            <form>
-                <TextField label="Title" />
-                <MultiTextField label="Items" />
-            </form>
-        </main>
     )
 }

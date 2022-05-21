@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { App } from './App';
 import { MyLists } from './Pages/MyLists';
-import { CreateList } from './Pages/CreateList';
+import { CreateList } from './Pages/CreateList/CreateList';
 
 const app = document.getElementById('app');
 ReactDOM.render(
