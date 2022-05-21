@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { lightGrey, white } from "./colors";
+import { silverFoil, white } from "./colors";
 
 const Container = styled.div`
     display: flex;
@@ -26,7 +26,7 @@ const Username = styled.span`
 `;
 
 const Discriminator = styled.span`
-    color: ${lightGrey};
+    color: ${silverFoil};
 `
 
 export function UserPlate() {

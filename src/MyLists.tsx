@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
 import { UserPlate } from "./UserPlate";
-import { white, purple } from "./colors";
+import { white, veryLightBlue } from "./colors";
 
 
 function CreateOne() {
@@ -11,7 +11,7 @@ function CreateOne() {
     `;
 
     const LinkToCreateList = styled(Link)`
-        color: ${purple};
+        color: ${veryLightBlue};
     `
     return (
         <div>

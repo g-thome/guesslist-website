@@ -1,6 +1,6 @@
 import DiscordLogo from './images/discord-logo.svg';
 import styled from 'styled-components';
-import { purple, white } from './colors';
+import { veryLightBlue, white } from './colors';
 
 
 function goToAuth() {
@@ -14,7 +14,7 @@ const Logo = styled.img`
 `
 
 const LoginButton = styled.button`
-    background-color: ${purple};
+    background-color: ${veryLightBlue};
     outline: none;
     border: none;
     padding: 1em;
