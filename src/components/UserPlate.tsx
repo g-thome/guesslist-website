@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { silverFoil, white } from "./colors";
+import { silverFoil, white } from "../colors";
 
 const Container = styled.div`
     display: flex;

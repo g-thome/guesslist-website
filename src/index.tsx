@@ -3,8 +3,8 @@ import './index.css';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { App } from './App';
-import { MyLists } from './MyLists';
-import { CreateList } from './CreateList';
+import { MyLists } from './Pages/MyLists';
+import { CreateList } from './Pages/CreateList';
 
 const app = document.getElementById('app');
 ReactDOM.render(

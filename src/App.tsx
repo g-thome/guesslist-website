@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Login } from './Login';
-import { MyLists } from './MyLists';
+import { Login } from './Pages/Login';
+import { MyLists } from './Pages/MyLists';
 import { loadUserInfo, saveAuthorizationToLocalStorage } from './userInfo';
 
 export function App() {

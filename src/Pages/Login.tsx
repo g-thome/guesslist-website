@@ -1,6 +1,6 @@
-import DiscordLogo from './images/discord-logo.svg';
+import DiscordLogo from '../images/discord-logo.svg';
 import styled from 'styled-components';
-import { veryLightBlue, white } from './colors';
+import { veryLightBlue, white } from '../colors';
 
 
 function goToAuth() {

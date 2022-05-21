@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
-import { UserPlate } from "./UserPlate";
-import { white, veryLightBlue } from "./colors";
+import { UserPlate } from "../components/UserPlate";
+import { white, veryLightBlue } from "../colors";
 
 
 function CreateOne() {

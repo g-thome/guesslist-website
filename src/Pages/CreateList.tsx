@@ -1,9 +1,9 @@
 import { useState, KeyboardEvent, useEffect } from "react";
 import styled from "styled-components"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { white, arsenic, gray } from "./colors";
-import { UserPlate } from "./UserPlate";
-import { keygen } from "./keygen";
+import { white, arsenic, gray } from "../colors";
+import { UserPlate } from "../components/UserPlate";
+import { keygen } from "../keygen";
 
 const StyledLabel = styled.span`
     color: ${white};
@@ -90,8 +90,6 @@ const PageName = styled.h1`
     `;
 
 export function CreateList() {
-    
-
     return (
         <main style={{padding: '1rem 2rem'}}>
             <UserPlate />
