@@ -46,7 +46,7 @@ const Suggestion = styled.li`
     }
 `;
 
-const InputBackground = styled.div`
+const InputBackground = styled.span`
     font-size: 25px;
     background-color: ${arsenic};
     border-radius: 10px;
@@ -60,7 +60,7 @@ const InputBackground = styled.div`
     }
 `
 
-const InvisibleInput = styled.span`
+const InvisibleInput = styled.div`
     border: none;
     outline: none;
     background-color: transparent;
@@ -87,9 +87,7 @@ export function CategoryPicker() {
     const [suggestions, setSuggestions] = useState([]);
     const [categoriesSelected, setCategoriesSelected] = useState([]);
 
-    function matchSearch(searchRaw: string) {
-        const search = searchRaw.startsWith(emptyCharacter) ? searchRaw.substring(1) : searchRaw;
-        console.log('search: ', search);
+    function matchSearch(search: string) {
         const matches = new Set();
         categories.map(c => {
             if (c.toLowerCase().includes(search.toLowerCase())
@@ -102,15 +100,17 @@ export function CategoryPicker() {
         return Array.from(matches);
     }
 
-    function onType(evt: ChangeEvent<HTMLInputElement>) {
+    function onInput(evt: ChangeEvent<HTMLInputElement>) {
         const txt = evt.target.textContent;
         
         if (txt.length === 0) {
             setSuggestions([]);
+            evt.target.textContent = emptyCharacter;
+            evt.target.setSelectionRange(txt.length, txt.length);
             return;
         }
 
-        setSuggestions(matchSearch(txt));
+        setSuggestions(matchSearch(txt.replace(emptyCharacter, '')));
     }
 
     function keyDown(evt: KeyboardEvent<HTMLInputElement>) {
@@ -126,7 +126,7 @@ export function CategoryPicker() {
             }
         }
 
-        if (evt.key === 'Backspace' || evt.key === 'Delete') {
+        if (['Backspace', 'Delete'].includes(evt.key)) {
             if (txt.length === 0 || txt === emptyCharacter) {
                 evt.preventDefault();
                 evt.currentTarget.textContent = emptyCharacter;
@@ -134,6 +134,12 @@ export function CategoryPicker() {
             } else {
                 setSuggestions(matchSearch(txt));
             }
+        }
+    }
+
+    function keyUp(evt: KeyboardEvent<HTMLInputElement>) {
+        if (['Backspace', 'Delete'].includes(evt.key) && evt.currentTarget.textContent.length === 0) {
+            evt.currentTarget.textContent = emptyCharacter;
         }
     }
 
@@ -147,11 +153,13 @@ export function CategoryPicker() {
                     role="textbox"
                     aria-multiline="true"
                     contentEditable
-                    suppressContentEditableWarning
                     placeholder="What are the subjects of your list?"
-                    onInput={onType}
+                    onInput={onInput}
                     onKeyDown={keyDown}
-                >{emptyCharacter}</InvisibleInput>
+                    onKeyUp={keyUp}
+                >
+                    {emptyCharacter}
+                </InvisibleInput>
             </InputBackground>
             {suggestions.length > 0 && (
                 suggestions.map(s => (

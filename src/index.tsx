@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
     }
 `;
 const app = document.getElementById('app');
+//TODO: ReactDom.render is deprecated
 ReactDOM.render(
     <>
         <GlobalStyle />
