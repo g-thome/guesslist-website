@@ -38,13 +38,28 @@ const categories = [
     'language'
 ];
 
-const Suggestion = styled.li`
+const SuggestionsList = styled.ul`
+    list-style: none;
     color: ${white};
+    background-color: ${arsenic};
+    padding: 1em;
+    border-radius: 0.5em;
+    font-size: 1.2em;
+    width: fit-content;
 
-    &:hover {
-        cursor: pointer;
+    li {
+      cursor: pointer;
     }
-`;
+    
+    li:not(:last-child) {
+      border-bottom: 1px solid ${gray};
+      padding-bottom: 0.8em;
+    }
+
+    li:not(:first-child) {
+      margin-top: 0.8em;
+    }
+`
 
 const InputBackground = styled.span`
     font-size: 25px;
@@ -153,6 +168,7 @@ export function CategoryPicker() {
                     role="textbox"
                     aria-multiline="true"
                     contentEditable
+                    suppressContentEditableWarning
                     placeholder="What are the subjects of your list?"
                     onInput={onInput}
                     onKeyDown={keyDown}
@@ -162,9 +178,11 @@ export function CategoryPicker() {
                 </InvisibleInput>
             </InputBackground>
             {suggestions.length > 0 && (
-                suggestions.map(s => (
-                    <Suggestion key={s}>{s}</Suggestion>
-                ))
+                <SuggestionsList>
+                  {suggestions.map(s => (
+                      <li key={s}>{s}</li>
+                  ))}
+                </SuggestionsList>
             )}
         </>
     )
