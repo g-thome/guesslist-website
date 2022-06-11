@@ -94,6 +94,11 @@ const Category = styled.span`
     display: inline;
 `;
 
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
 const insertHashtag = (text: string) => '#' + text;
 
 const emptyCharacter = String.fromCodePoint(0xFEFF);
@@ -159,7 +164,7 @@ export function CategoryPicker() {
     }
 
     return (
-        <>
+        <Container>
             <StyledLabel>Categories</StyledLabel>
             <InputBackground onClick={() => document.getElementById('categories-input').focus()}>
                     {categoriesSelected.map(insertHashtag).map(c => <Category key={c}>{c}</Category>)}
@@ -184,6 +189,6 @@ export function CategoryPicker() {
                   ))}
                 </SuggestionsList>
             )}
-        </>
+        </Container>
     )
 } 
