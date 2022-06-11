@@ -57,11 +57,11 @@ const Container = styled.div`
     flex-direction: column;
 `;
 
-export function LanguageSelector() {
+export function LanguageSelector({onSelect}) {
   return (
     <Container>
       <StyledLabel style={{marginBottom: '0.5em'}}>Language</StyledLabel>
-      <Selector>
+      <Selector onChange={(evt) => onSelect(evt.currentTarget.value)}>
           {languages.map(l => <option key={l} value={l}>{l}</option>)}
       </Selector>
     </Container>)

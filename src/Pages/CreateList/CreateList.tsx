@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from "styled-components"
 import { white } from "../../colors";
 import { UserPlate } from "../../components/UserPlate";
@@ -21,7 +22,19 @@ const CreateListForm = styled.form`
     }
 `;
 
+interface ICreateList {
+    title: string;
+    items: string[];
+    categories: string[];
+    language: string;
+}
+
 export function CreateList() {
+    const [title, setTitle] = useState("");
+    const [items, setItems] = useState<string[]>([]);
+    const [categories, setCategories] = useState<string[]>([]);
+    const [language, setLanguage] = useState("");
+
     return (
         <main style={{padding: '1rem 2rem'}}>
             <UserPlate />
@@ -29,10 +42,10 @@ export function CreateList() {
                 Create your first list!
             </PageName>
             <CreateListForm>
-                <TextField label="Title" />
-                <MultiTextField label="Items" />
-                <CategoryPicker />
-                <LanguageSelector style={{marginBottom: '1em'}}/>
+                <TextField onChange={(evt) => setTitle(evt.currentTarget.value)} label="Title" />
+                <MultiTextField onChange={setItems} label="Items" />
+                <CategoryPicker onChange={setCategories} />
+                <LanguageSelector onSelect={setLanguage} style={{marginBottom: '1em'}}/>
             </CreateListForm>
         </main>
     )

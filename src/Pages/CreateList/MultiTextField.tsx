@@ -17,7 +17,7 @@ export const AddFieldButton = styled(AddCircleIcon)`
         }
 `;
 
-export function MultiTextField({ label }) {
+export function MultiTextField({ label, onChange }) {
     interface IItemListItem {
         text: string;
         itemId: string;
@@ -29,6 +29,10 @@ export function MultiTextField({ label }) {
     useEffect(() => {
         document.getElementById(focusItemId)?.focus();
     }, [focusItemId]);
+
+    useEffect(() => {
+        onChange(items.map(item => item.text));
+    }, [items]);
 
     function addField() { 
         const id = keygen('itemslist');
@@ -47,12 +51,18 @@ export function MultiTextField({ label }) {
             setFocusItemId(items[previous].itemId);
         }
     }
+
+    function onItemChange(evt: ChangeEvent<HTMLInputElement>) {
+      const itemChanged = items.indexOf(items.find(i => i.itemId === evt.target.id));
+      items[itemChanged].text = evt.target.value;
+      setItems([...items]);
+    }
     
     return (
         <label>
             <StyledLabel>{label}</StyledLabel>
             {items.map((i) => {
-                return <StyledInput autoFocus key={i.itemId} id={i.itemId} type="text" onKeyDown={keyDown} />
+                return <StyledInput onChange={onItemChange} autoFocus key={i.itemId} id={i.itemId} type="text" onKeyDown={keyDown} />
             })}
             <AddFieldButton fontSize="large" onClick={addField}  />
         </label> 

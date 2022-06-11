@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, KeyboardEvent } from "react";
+import { ChangeEvent, useState, useEffect, KeyboardEvent } from "react";
 import styled from "styled-components";
 import { gray, white, arsenic } from "../../colors";
 import { StyledLabel } from "./StyledLabel";
@@ -103,9 +103,13 @@ const insertHashtag = (text: string) => '#' + text;
 
 const emptyCharacter = String.fromCodePoint(0xFEFF);
 
-export function CategoryPicker() {
+export function CategoryPicker({onChange}) {
     const [suggestions, setSuggestions] = useState([]);
     const [categoriesSelected, setCategoriesSelected] = useState([]);
+
+    useEffect(() => {
+      onChange(categoriesSelected);
+    }, [categoriesSelected]);
 
     function matchSearch(search: string) {
         const matches = new Set();
