@@ -7,7 +7,7 @@ const Container = styled.div`
     margin: 1rem 0 0 1rem;
 `
 
-const Avatar = styled.img`
+export const Avatar = styled.img`
     width: 50px;
     height: 50px;
     border-radius: 50%;
