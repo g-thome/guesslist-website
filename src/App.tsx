@@ -1,37 +1,35 @@
-import { useEffect, useState } from 'react';
-import { Login } from './Pages/Login';
+import 'normalize.css';
+import { createGlobalStyle } from 'styled-components';
+import './index.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Home } from './Home';
 import { MyLists } from './Pages/MyLists';
-import { loadUserInfo, saveAuthorizationToLocalStorage } from './userInfo';
+import { CreateList } from './Pages/CreateList/CreateList';
+import { PreviewPage } from './Pages/Preview';
+
+const GlobalStyle = createGlobalStyle`
+    * {
+        box-sizing: border-box;
+    }
+`;
 
 export function App() {
-    const authorizationExpireDate = localStorage.getItem('expire_date');
-    const isAuthorizationInURL = window.location.href.includes('access_token');
-
-    if ((authorizationExpireDate && new Date(authorizationExpireDate) < new Date()) || !isAuthorizationInURL && !authorizationExpireDate) {
-        localStorage.clear();
-        return <Login />;
-    }
-    
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        async function fetchUser() {
-            try {
-                await loadUserInfo();
-                setIsLoading(false);
-            } catch (error) {
-                console.error(`couldn't fetch user info ${error}`);
-                return;
-            }
-        }
-
-        saveAuthorizationToLocalStorage();
-        fetchUser();
-    }, []);
-
     return (
-        <>{
-        isLoading ? (<span>loading...</span>) : (<MyLists />)
-        }
-        </>);
+        <>
+            <GlobalStyle />
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/mylists" element={<MyLists />} />
+                    <Route path="/create-list" element={<CreateList />} />
+                    <Route path="/preview" element={<PreviewPage />} />
+                    <Route path='*' element={
+                        <main>
+                            <h1>404</h1>
+                        </main>
+                    } />
+                </Routes>
+            </BrowserRouter>
+        </>
+    )
 }
