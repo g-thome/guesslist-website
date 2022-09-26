@@ -1,16 +1,16 @@
-import styled from 'styled-components';
-import {useState, useEffect} from 'react';
-import { UserPlate, Avatar } from '../components/UserPlate';
-import { Button } from '../components/Button';
-import { Page } from '../components/Page';
-import { white, arsenic, veryLightBlue, silverFoil } from '../colors';
+import styled from "styled-components";
+import { UserPlate } from "../components/UserPlate";
+import { Avatar } from "../components/Avatar";
+import { Button } from "../components/Button";
+import { Page } from "../components/Page";
+import { white, arsenic, veryLightBlue, silverFoil } from "../colors";
 
-const asteriskify = (str: string) => '\*'.repeat(str.length);
+const asteriskify = (str: string) => "*".repeat(str.length);
 
 enum HideLevel {
   ALL,
   PARTIAL,
-  NONE
+  NONE,
 }
 
 const Outer = styled.div`
@@ -62,64 +62,76 @@ interface IDiscordPreviewProps {
   title: string;
 }
 
-function DiscordPreview({hideLevel, items, category, author, title}:IDiscordPreviewProps) {
-  const [listHidden, setListHidden] = useState<string[]>([]);
-
-  useEffect(() => {
-    switch (hideLevel) {
-      case HideLevel.NONE:
-        setListHidden(items);
-        break;
-      case HideLevel.PARTIAL:
-        setListHidden(items.map((item, idx) => idx % 2 === 0 ? asteriskify(item) : item));
-        break;
-      case HideLevel.ALL:
-        setListHidden(items.map(asteriskify));
-        break;
-    }
-  }, []);
+function DiscordPreview({
+  hideLevel,
+  items,
+  category,
+  author,
+  title,
+}: IDiscordPreviewProps) {
+  let listHidden: string[];
+  switch (hideLevel) {
+    case HideLevel.NONE:
+      listHidden = items;
+      break;
+    case HideLevel.PARTIAL:
+      listHidden = items.map((item, idx) =>
+        idx % 2 === 0 ? asteriskify(item) : item
+      );
+      break;
+    case HideLevel.ALL:
+      listHidden = items.map(asteriskify);
+      break;
+  }
 
   return (
     <Outer>
       <Avatar />
       <BotUsername>Guess List</BotUsername>
       <BotTag>BOT</BotTag>
-      <span style={{color: silverFoil, marginLeft: '0.5em'}}>11/11/2011</span>
+      <span style={{ color: silverFoil, marginLeft: "0.5em" }}>11/11/2011</span>
       <Container>
         <div>
           <ListTitle>{title}</ListTitle>
-          <ol style={{paddingLeft: '1em'}}>
-            {listHidden.map(i => <li key={i + Math.random().toString()}>{i}</li>)}
+          <ol style={{ paddingLeft: "1em" }}>
+            {listHidden.map((i) => (
+              <li key={i + Math.random().toString()}>{i}</li>
+            ))}
           </ol>
         </div>
-        <p style={{marginBottom: 0}}>#{category}</p>
-        <p style={{marginTop: 0, fontSize: '.8em'}}>by <span>@{author}</span></p>
+        <p style={{ marginBottom: 0 }}>#{category}</p>
+        <p style={{ marginTop: 0, fontSize: ".8em" }}>
+          by <span>@{author}</span>
+        </p>
       </Container>
-    </Outer>);
+    </Outer>
+  );
 }
 
-export function PreviewPage() {
-  return (<>
-    <UserPlate />
-    <Page title="Preview">
-      <main>
-      {Object.keys(HideLevel)
-        .filter(k => !isNaN(Number(k)))
-        .map(level => (
-          <DiscordPreview
-            hideLevel={Number(level)}
-            title="Countries"
-            items={["Spain", "Brazil", "Canada", "Chad", "Cyprus"]}
-            category="geography"
-            author="gabrieleiro"
-          />)
-        )
-      }
-      </main>
-      <ButtonLine>
-        <Button value="Back to editing"/>
-        <Button value="Done"/>
-      </ButtonLine>
-    </Page>
-  </>)
+export default function PreviewPage() {
+  return (
+    <>
+      <UserPlate />
+      <Page title="Preview">
+        <main>
+          {Object.keys(HideLevel)
+            .filter((k) => !isNaN(Number(k)))
+            .map((level) => (
+              <DiscordPreview
+                key={`preview-${Math.random()}`}
+                hideLevel={Number(level)}
+                title="Countries"
+                items={["Spain", "Brazil", "Canada", "Chad", "Cyprus"]}
+                category="geography"
+                author="gabrieleiro"
+              />
+            ))}
+        </main>
+        <ButtonLine>
+          <Button value="Back to editing" />
+          <Button value="Done" />
+        </ButtonLine>
+      </Page>
+    </>
+  );
 }

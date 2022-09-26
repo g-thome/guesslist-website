@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import {veryLightBlue, white} from '../colors';
+import styled from "styled-components";
+import { veryLightBlue, white } from "../colors";
 
 const StyledButton = styled.input`
   background-color: ${veryLightBlue};
@@ -13,6 +13,10 @@ const StyledButton = styled.input`
   }
 `;
 
-export const Button = ({...props}) => <StyledButton type="button" {...props}/>
+export const Button = ({ ...props }) => (
+  <StyledButton type="button" {...props} />
+);
 
-export const Submit = ({...props}) => <StyledButton type="submit" {...props}/>
+export const Submit = ({ ...props }) => (
+  <StyledButton type="submit" {...props} />
+);

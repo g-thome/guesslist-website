@@ -1,42 +1,24 @@
-import styled from "styled-components"
+import { Avatar } from './Avatar';
 import { silverFoil, white } from "../colors";
-
-const Container = styled.div`
-    display: flex;
-    flex-direction: row;
-    margin: 1rem 0 0 1rem;
-`
-
-export const Avatar = styled.img`
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin: 0 .6em;
-`;
-
-const UserNameAndAvatar = styled.div`
-    display: flex;
-    flex-direction: column;
-    font-weight: normal;
-    font-size: 20px;
-`
-
-const Username = styled.span`
-    color: ${white};
-`;
-
-const Discriminator = styled.span`
-    color: ${silverFoil};
-`
+import { useUserContext } from '../context/UserContext';
 
 export function UserPlate() {
-    return (
-        <Container>
-            <Avatar src={sessionStorage.getItem('userAvatar')} />
-            <UserNameAndAvatar>
-                <Username>{sessionStorage.getItem('userName')}</Username>
-                <Discriminator>#{sessionStorage.getItem('userDiscriminator')}</Discriminator>
-            </UserNameAndAvatar>
-        </Container>
-    )
+  const { user } = useUserContext();
+
+  return (
+    <div style={{ display: "flex", flexDirection: "row", margin: "1rem 0 0 1rem" }}>
+      <Avatar />
+      <div style={{
+        display: "flex",
+        flexDirection: "column",
+        fontWeight: "normal",
+        fontSize: "20px"
+      }}>
+        <span style={{color: white}}>{user.username}</span>
+        <span style={{color: silverFoil}}>
+          #{user.discriminator}
+        </span>
+      </div>
+    </div>
+  );
 }
