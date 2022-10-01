@@ -19,13 +19,13 @@ export default function MyLists() {
       <UserPlate />
       <Page title="My Lists">
         <div>
-          <span className="text-white ml-2">
+          <p className="text-white">
             You don&apos;t have any lists yet. Do you want to{" "}
             <Link href={"/create-list"}>
               <a className="text-veryLightBlue">create one</a>
             </Link>
             ?
-          </span>
+          </p>
         </div>
       </Page>
     </div>
