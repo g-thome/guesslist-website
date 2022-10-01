@@ -36,11 +36,10 @@ const categories = [
   "language",
 ];
 
-const emptyCharacter = String.fromCodePoint(0xfeff);
-
 export function CategoryPicker({ onChange }) {
   const [suggestions, setSuggestions] = useState([]);
   const [categoriesSelected, setCategoriesSelected] = useState([]);
+  const [text, setText] = useState("");
 
   useEffect(() => {
     onChange(categoriesSelected);
@@ -62,35 +61,29 @@ export function CategoryPicker({ onChange }) {
   }
 
   function onInput(evt: ChangeEvent<HTMLInputElement>) {
-    const txt = evt.target.textContent;
+    const txt = evt.target.value;
+
+    setText(txt);
 
     if (txt.length === 0) {
       setSuggestions([]);
-      evt.target.textContent = emptyCharacter;
-      evt.target.setSelectionRange(txt.length, txt.length);
       return;
     }
 
-    setSuggestions(matchSearch(txt.replace(emptyCharacter, "")));
+    setSuggestions(matchSearch(txt));
   }
 
   function keyDown(evt: KeyboardEvent<HTMLInputElement>) {
-    const txt = evt.currentTarget.textContent;
+    const txt = evt.currentTarget.value;
 
     if (evt.key === "Enter") {
-      evt.preventDefault();
-
       if (suggestions.length > 0) {
-        setSuggestions([]);
-        setCategoriesSelected([...categoriesSelected, suggestions[0]]);
-        evt.currentTarget.textContent = "";
+        pickSuggestion(suggestions[0]);
       }
     }
 
     if (["Backspace", "Delete"].includes(evt.key)) {
-      if (txt.length === 0 || txt === emptyCharacter) {
-        evt.preventDefault();
-        evt.currentTarget.textContent = emptyCharacter;
+      if (txt === "") {
         setCategoriesSelected(categoriesSelected.slice(0, -1));
       } else {
         setSuggestions(matchSearch(txt));
@@ -98,51 +91,51 @@ export function CategoryPicker({ onChange }) {
     }
   }
 
-  function keyUp(evt: KeyboardEvent<HTMLInputElement>) {
-    if (
-      ["Backspace", "Delete"].includes(evt.key) &&
-      evt.currentTarget.textContent.length === 0
-    ) {
-      evt.currentTarget.textContent = emptyCharacter;
-    }
+  function pickSuggestion(suggestion: string) {
+    setText("");
+    setSuggestions([]);
+    setCategoriesSelected([...categoriesSelected, suggestion]);
+  }
+
+  function focus() {
+    document.getElementById("categoriesInput").focus();
   }
 
   return (
     <div className="flex flex-col">
       <StyledLabel>Categories</StyledLabel>
-      <span
-        className="mt-0.5 py-4 px-8 w-full border-0 rounded-full bg-arsenic outline-0 text-white text-2xl"
-        onClick={() => document.getElementById("categories-input").focus()}
+      <div
+        onClick={focus}
+        className="mt-0.5 py-4 px-8 w-full border-0 rounded-full bg-arsenic outline-0 text-white text-2xl cursor-text"
       >
         {categoriesSelected
           .map((c) => "#" + c)
           .map((c) => (
             <span
               key={c}
-              className="text-arsenic bg-gray px-2 py-1 rounded text-center mr-0.5 inline"
+              className="text-arsenic bg-gray px-2 py-1 rounded text-center mr-1 inline"
             >
               {c}
             </span>
           ))}
-        <div
-          id="categories-input"
-          role="textbox"
-          aria-multiline="true"
-          contentEditable
-          suppressContentEditableWarning
-          placeholder="What are the subjects of your list?"
-          onInput={onInput}
+        <input
+          id="categoriesInput"
+          onChange={onInput}
           onKeyDown={keyDown}
-          onKeyUp={keyUp}
-          className="border-0 outline-0 bg-transparent text-white w-full inline"
-        >
-          {emptyCharacter}
-        </div>
-      </span>
+          type="text"
+          value={text}
+          className="border-0 outline-0 bg-transparent text-white inline"
+        ></input>
+      </div>
       {suggestions.length > 0 && (
-        <ul className="list-none text-white bg-arsenic p-1 rounded text-sm w-fit not:last:border-b-1 not:last:pb-0.8 not:first:mt-0.8">
+        <ul className="list-none mt-2 text-white bg-arsenic rounded p-1 text-sm w-fit not:last:border-b-1 not:last:pb-0.8 not:first:mt-0.8">
           {suggestions.map((s) => (
-            <li key={s} className="cursor-pointer">
+            <li
+              key={s}
+              onClick={(evt) => pickSuggestion(evt.currentTarget.dataset.value)}
+              className="cursor-pointer text-base p-2"
+              data-value={s}
+            >
               {s}
             </li>
           ))}
