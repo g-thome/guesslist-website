@@ -1,17 +1,5 @@
-import { arsenic, white } from "../colors";
-import styled from "styled-components";
+import { MouseEvent } from "react";
 import { StyledLabel } from "./StyledLabel";
-
-const Selector = styled.select`
-  background-color: ${arsenic};
-  width: fit-content;
-  color: ${white};
-  border: none;
-  outline: none;
-  font-size: 25px;
-  padding: 0.5em;
-  border-radius: 10px;
-`;
 
 const languages = [
   "english",
@@ -52,11 +40,26 @@ const languages = [
   "sweedish",
 ];
 
+function Selector({ children, ...props }) {
+  return (
+    <select
+      {...props}
+      className="mt-0.5 py-4 px-8 w-fit border-0 rounded-full bg-arsenic outline-0 text-white text-2xl cursor-pointer"
+    >
+      {children}
+    </select>
+  );
+}
+
 export function LanguageSelector({ onSelect, ...props }) {
   return (
-    <div style={{display: 'flex', flexDirection: 'column'}} {...props}>
-      <StyledLabel style={{ marginBottom: "0.5em" }}>Language</StyledLabel>
-      <Selector onChange={(evt) => onSelect(evt.currentTarget.value)}>
+    <div className="flex flex-col" {...props}>
+      <StyledLabel className="block">Language</StyledLabel>
+      <Selector
+        onChange={(evt: MouseEvent<HTMLSelectElement>) =>
+          onSelect(evt.currentTarget.value)
+        }
+      >
         {languages.map((l) => (
           <option key={l} value={l}>
             {l}

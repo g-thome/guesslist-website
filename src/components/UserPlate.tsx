@@ -1,23 +1,17 @@
-import { Avatar } from './Avatar';
-import { silverFoil, white } from "../colors";
-import { useUserContext } from '../context/UserContext';
+import { Avatar } from "./Avatar";
+import { useUserContext } from "../context/UserContext";
 
-export function UserPlate() {
+export function UserPlate({ ...props }) {
   const { user } = useUserContext();
 
   return (
-    <div style={{ display: "flex", flexDirection: "row", margin: "1rem 0 0 1rem" }}>
-      <Avatar />
-      <div style={{
-        display: "flex",
-        flexDirection: "column",
-        fontWeight: "normal",
-        fontSize: "20px"
-      }}>
-        <span style={{color: white}}>{user.username}</span>
-        <span style={{color: silverFoil}}>
-          #{user.discriminator}
-        </span>
+    <div {...props}>
+      <div className="flex mt-1 mr-0 mb-0 ml-1">
+        <Avatar className="mr-2" />
+        <div className="flex flex-col text-normal text-lg">
+          <span className={`text-white`}>{user.username}</span>
+          <span className={`text-silverFoil -mt-2`}>#{user.discriminator}</span>
+        </div>
       </div>
     </div>
   );

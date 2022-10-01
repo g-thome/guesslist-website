@@ -1,22 +1,22 @@
-import styled from "styled-components";
-import { veryLightBlue, white } from "../colors";
+import { MouseEventHandler } from "react";
 
-const StyledButton = styled.input`
-  background-color: ${veryLightBlue};
-  color: ${white};
-  border: none;
-  font-size: 24px;
-  padding: 0.5em 1em;
+type ButtonProps = {
+  onClick?: MouseEventHandler<HTMLInputElement>;
+  className?: string;
+  type: "button" | "submit";
+  value: string;
+};
 
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-export const Button = ({ ...props }) => (
-  <StyledButton type="button" {...props} />
-);
-
-export const Submit = ({ ...props }) => (
-  <StyledButton type="submit" {...props} />
-);
+export const Button = ({ onClick, className, type, value }: ButtonProps) => {
+  return (
+    <input
+      className={
+        "bg-veryLightBlue text-white border-0 text-xl py-1 px-3 cursor-pointer " +
+        className
+      }
+      onClick={onClick}
+      type={type}
+      value={value}
+    ></input>
+  );
+};

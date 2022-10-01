@@ -8,15 +8,17 @@ type TextFieldProps = {
   fixHintText?: string;
 };
 
-export function TextField({ label, onChange }: TextFieldProps) {
+export function TextField({ label, onChange, ...props }: TextFieldProps) {
   return (
-    <label>
-      <StyledLabel>{label}</StyledLabel>
-      <StyledInput
-        onChange={onChange}
-        type="text"
-        placeholder="Enter list name"
-      />
-    </label>
+    <div {...props}>
+      <label>
+        <StyledLabel>{label}</StyledLabel>
+        <StyledInput
+          onChange={onChange}
+          type="text"
+          placeholder="Enter list name"
+        />
+      </label>
+    </div>
   );
 }

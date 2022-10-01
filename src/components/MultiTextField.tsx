@@ -1,21 +1,8 @@
 import { useState, useEffect, KeyboardEvent, ChangeEvent } from "react";
-import styled from "styled-components";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { gray } from "../colors";
 import { keygen } from "../keygen";
 import { StyledLabel } from "./StyledLabel";
 import { StyledInput } from "./StyledInput";
-
-export const AddFieldButton = styled(AddCircleIcon)`
-  margin-top: 0.3em;
-  width: 2rem;
-  height: 2rem;
-  color: ${gray};
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
 
 export function MultiTextField({ label, onChange }) {
   interface IItemListItem {
@@ -82,7 +69,11 @@ export function MultiTextField({ label, onChange }) {
           />
         );
       })}
-      <AddFieldButton fontSize="large" onClick={addField} />
+      <AddCircleIcon
+        fontSize="large"
+        onClick={addField}
+        className="mt-1 w-8 h-8 text-gray cursor-pointer"
+      />
     </label>
   );
 }

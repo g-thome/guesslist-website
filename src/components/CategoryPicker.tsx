@@ -1,6 +1,4 @@
 import { ChangeEvent, useState, useEffect, KeyboardEvent } from "react";
-import styled from "styled-components";
-import { gray, white, arsenic } from "../colors";
 import { StyledLabel } from "./StyledLabel";
 
 const categories = [
@@ -37,64 +35,6 @@ const categories = [
   "religion",
   "language",
 ];
-
-const SuggestionsList = styled.ul`
-  list-style: none;
-  color: ${white};
-  background-color: ${arsenic};
-  padding: 1em;
-  border-radius: 0.5em;
-  font-size: 1.2em;
-  width: fit-content;
-
-  li {
-    cursor: pointer;
-  }
-
-  li:not(:last-child) {
-    border-bottom: 1px solid ${gray};
-    padding-bottom: 0.8em;
-  }
-
-  li:not(:first-child) {
-    margin-top: 0.8em;
-  }
-`;
-
-const InputBackground = styled.span`
-  font-size: 25px;
-  background-color: ${arsenic};
-  border-radius: 10px;
-  padding: 0.5em 1em;
-  margin-top: 0.5em;
-  height: fit-content;
-  max-height: 10000px;
-
-  &:hover {
-    cursor: text;
-  }
-`;
-
-const InvisibleInput = styled.div`
-  border: none;
-  outline: none;
-  background-color: transparent;
-  color: ${white};
-  width: 100%;
-  display: inline;
-`;
-
-const Category = styled.span`
-  color: ${arsenic};
-  background-color: ${gray};
-  padding: 0.2em;
-  border-radius: 10px;
-  text-align: center;
-  margin-right: 0.5em;
-  display: inline;
-`;
-
-const insertHashtag = (text: string) => "#" + text;
 
 const emptyCharacter = String.fromCodePoint(0xfeff);
 
@@ -168,15 +108,23 @@ export function CategoryPicker({ onChange }) {
   }
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column'}}>
+    <div className="flex flex-col">
       <StyledLabel>Categories</StyledLabel>
-      <InputBackground
+      <span
+        className="mt-0.5 py-4 px-8 w-full border-0 rounded-full bg-arsenic outline-0 text-white text-2xl"
         onClick={() => document.getElementById("categories-input").focus()}
       >
-        {categoriesSelected.map(insertHashtag).map((c) => (
-          <Category key={c}>{c}</Category>
-        ))}
-        <InvisibleInput
+        {categoriesSelected
+          .map((c) => "#" + c)
+          .map((c) => (
+            <span
+              key={c}
+              className="text-arsenic bg-gray px-2 py-1 rounded text-center mr-0.5 inline"
+            >
+              {c}
+            </span>
+          ))}
+        <div
           id="categories-input"
           role="textbox"
           aria-multiline="true"
@@ -186,16 +134,19 @@ export function CategoryPicker({ onChange }) {
           onInput={onInput}
           onKeyDown={keyDown}
           onKeyUp={keyUp}
+          className="border-0 outline-0 bg-transparent text-white w-full inline"
         >
           {emptyCharacter}
-        </InvisibleInput>
-      </InputBackground>
+        </div>
+      </span>
       {suggestions.length > 0 && (
-        <SuggestionsList>
+        <ul className="list-none text-white bg-arsenic p-1 rounded text-sm w-fit not:last:border-b-1 not:last:pb-0.8 not:first:mt-0.8">
           {suggestions.map((s) => (
-            <li key={s}>{s}</li>
+            <li key={s} className="cursor-pointer">
+              {s}
+            </li>
           ))}
-        </SuggestionsList>
+        </ul>
       )}
     </div>
   );

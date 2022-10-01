@@ -1,9 +1,6 @@
-import styled from "styled-components";
 import { UserPlate } from "../components/UserPlate";
 import { Avatar } from "../components/Avatar";
 import { Button } from "../components/Button";
-import { Page } from "../components/Page";
-import { white, arsenic, veryLightBlue, silverFoil } from "../colors";
 
 const asteriskify = (str: string) => "*".repeat(str.length);
 
@@ -12,47 +9,6 @@ enum HideLevel {
   PARTIAL,
   NONE,
 }
-
-const Outer = styled.div`
-  display: inline-block;
-  margin-right: 3em;
-`;
-
-const Container = styled.div`
-  width: 300px;
-  color: ${white};
-  background-color: ${arsenic};
-  border-radius 5px;
-  border-left: 10px solid ${white};
-  padding: 0.2em 1em;
-  margin-top: 1em;
-`;
-
-const BotUsername = styled.span`
-  color: ${white};
-  font-size: 1.4em;
-  font-weight: 600;
-`;
-
-const BotTag = styled.div`
-  color: ${white};
-  background-color: ${veryLightBlue};
-  display: inline-block;
-  border-radius: 5px;
-  padding: 3px;
-  margin-left: 1em;
-`;
-
-const ListTitle = styled.p`
-  font-size: 1.2em;
-  font-weight: 600;
-`;
-
-const ButtonLine = styled.div`
-  margin-top: 2em;
-  display: flex;
-  justify-content: space-between;
-`;
 
 interface IDiscordPreviewProps {
   hideLevel: HideLevel;
@@ -85,53 +41,65 @@ function DiscordPreview({
   }
 
   return (
-    <Outer>
-      <Avatar />
-      <BotUsername>Guess List</BotUsername>
-      <BotTag>BOT</BotTag>
-      <span style={{ color: silverFoil, marginLeft: "0.5em" }}>11/11/2011</span>
-      <Container>
-        <div>
-          <ListTitle>{title}</ListTitle>
-          <ol style={{ paddingLeft: "1em" }}>
+    <div className="flex">
+      <Avatar className="mr-4" />
+      <div className="flex flex-col">
+        <div className="flex items-end">
+          <span className="text-white text-xl font-medium leading-4">
+            Guess List
+          </span>
+          <span className="text-white bg-veryLightBlue inline-block rounded py-0.5 px-1 ml-1 text-[9px]">
+            BOT
+          </span>
+          <span className="text-silverFoil ml-0.5 text-xs">11/11/2011</span>
+        </div>
+        <div className="text-white bg-darkCharcoal rounded border-l-8 border-white py-1 px-2 mt-2">
+          <p className="font-medium mb-2">{title}</p>
+          <ol className="ml-4 pl-1 list-decimal mb-4">
             {listHidden.map((i) => (
-              <li key={i + Math.random().toString()}>{i}</li>
+              <li
+                className="font-normal text-sm"
+                key={i + Math.random().toString()}
+              >
+                {i}
+              </li>
             ))}
           </ol>
+          <p className="mb-0 text-sm">#{category}</p>
+          <p className="mt-0 text-0.8 text-xs">
+            by <span>@{author}</span>
+          </p>
         </div>
-        <p style={{ marginBottom: 0 }}>#{category}</p>
-        <p style={{ marginTop: 0, fontSize: ".8em" }}>
-          by <span>@{author}</span>
-        </p>
-      </Container>
-    </Outer>
+      </div>
+    </div>
   );
 }
 
 export default function PreviewPage() {
   return (
-    <>
-      <UserPlate />
-      <Page title="Preview">
-        <main>
-          {Object.keys(HideLevel)
-            .filter((k) => !isNaN(Number(k)))
-            .map((level) => (
-              <DiscordPreview
-                key={`preview-${Math.random()}`}
-                hideLevel={Number(level)}
-                title="Countries"
-                items={["Spain", "Brazil", "Canada", "Chad", "Cyprus"]}
-                category="geography"
-                author="gabrieleiro"
-              />
-            ))}
-        </main>
-        <ButtonLine>
-          <Button value="Back to editing" />
-          <Button value="Done" />
-        </ButtonLine>
-      </Page>
-    </>
+    <div className="p-8">
+      <UserPlate className="mb-4" />
+      <h1 className="text-white text-5xl mb-14">Preview</h1>
+      <main className="flex gap-x-8">
+        {Object.keys(HideLevel)
+          .filter((k) => !isNaN(Number(k)))
+          .map((level) => (
+            <DiscordPreview
+              key={`preview-${Math.random()}`}
+              hideLevel={Number(level)}
+              title="Countries"
+              items={["Spain", "Brazil", "Canada", "Chad", "Cyprus"]}
+              category="geography"
+              author="gabrieleiro"
+            />
+          ))}
+      </main>
+      <div className="absolute bottom-8 left-8">
+        <Button type="button" value="Back to editing" />
+      </div>
+      <div className="absolute bottom-8 right-8">
+        <Button type="button" value="Done" />
+      </div>
+    </div>
   );
 }

@@ -1,7 +1,12 @@
-import styled from "styled-components";
-import { white } from "../colors";
+import { ReactNode } from "react";
 
-export const StyledLabel = styled.span`
-  color: ${white};
-  font-size: 35px;
-`;
+type StyledLabelProps = {
+  className?: string;
+  children: ReactNode | ReactNode[];
+};
+
+export function StyledLabel({ children, className }: StyledLabelProps) {
+  return (
+    <label className={"text-white text-3xl " + className}>{children}</label>
+  );
+}

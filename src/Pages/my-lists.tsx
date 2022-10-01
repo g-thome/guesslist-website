@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { UserPlate } from "../components/UserPlate";
-import { white, veryLightBlue } from "../colors";
-import { GetServerSidePropsContext } from "next";
 import Link from "next/link";
 
 function CreateOne() {
   return (
     <div>
-      <span style={{color: white, marginLeft: '2rem'}}>
-        You don&apos;t have any lists. Do you want{" "}
+      <span className="text-white ml-2">
+        You don&apos;t have any lists yet. Do you want to{" "}
         <Link href={"/create-list"}>
-          <a style={{color: veryLightBlue}}>to create one</a>
+          <a className="text-veryLightBlue">create one</a>
         </Link>
         ?
       </span>
@@ -30,22 +28,12 @@ export default function MyLists() {
   }
 
   return (
-    <>
+    <div className="p-8">
       <UserPlate />
-      <h1
-        style={{
-          marginLeft: "2rem",
-          color: white,
-          fontWeight: "normal",
-        }}
-      >
+      <h1 className="ml-2 text-white font-normal">
         My Lists
       </h1>
       <CreateOne />
-    </>
+    </div>
   );
-}
-
-export function getServerSideProps(context: GetServerSidePropsContext) {
-    return { props: {}}
 }
