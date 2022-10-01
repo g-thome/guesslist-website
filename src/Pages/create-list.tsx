@@ -5,6 +5,7 @@ import { TextField } from "../components/TextField";
 import { MultiTextField } from "../components/MultiTextField";
 import { CategoryPicker } from "../components/CategoryPicker";
 import { LanguageSelector } from "../components/LanguageSelector";
+import { Page } from "../components/Page";
 
 export default function CreateList() {
   const [title, setTitle] = useState("");
@@ -26,27 +27,28 @@ export default function CreateList() {
   return (
     <div className="p-8">
       <UserPlate />
-      <main className="py-1 px-14">
-        <h1 className="text-white text-5xl mb-14">Create your first list!</h1>
-        <form
-          onSubmit={clickNext}
-          className="flex flex-col w-full max-w-xl gap-y-4"
-        >
-          <TextField
-            onChange={(evt) => setTitle(evt.currentTarget.value)}
-            label="Title"
+      <Page title="Create your first list!">
+        <main>
+          <form
+            onSubmit={clickNext}
+            className="flex flex-col w-full max-w-xl gap-y-4"
+          >
+            <TextField
+              onChange={(evt) => setTitle(evt.currentTarget.value)}
+              label="Title"
+            />
+            <MultiTextField onChange={setItems} label="Items" />
+            <CategoryPicker onChange={setCategories} />
+            <LanguageSelector onSelect={setLanguage} className="mb-1" />
+          </form>
+          <Button
+            className="absolute right-4 bottom-4"
+            value="NEXT"
+            onClick={clickNext}
+            type="submit"
           />
-          <MultiTextField onChange={setItems} label="Items" />
-          <CategoryPicker onChange={setCategories} />
-          <LanguageSelector onSelect={setLanguage} className="mb-1" />
-        </form>
-        <Button
-          className="absolute right-4 bottom-4"
-          value="NEXT"
-          onClick={clickNext}
-          type="submit"
-        />
-      </main>
+        </main>
+      </Page>
     </div>
   );
 }

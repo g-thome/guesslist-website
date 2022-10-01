@@ -1,6 +1,7 @@
 import { UserPlate } from "../components/UserPlate";
 import { Avatar } from "../components/Avatar";
 import { Button } from "../components/Button";
+import { Page } from "../components/Page";
 
 const asteriskify = (str: string) => "*".repeat(str.length);
 
@@ -79,27 +80,28 @@ export default function PreviewPage() {
   return (
     <div className="p-8">
       <UserPlate className="mb-4" />
-      <h1 className="text-white text-5xl mb-14">Preview</h1>
-      <main className="flex gap-x-8">
-        {Object.keys(HideLevel)
-          .filter((k) => !isNaN(Number(k)))
-          .map((level) => (
-            <DiscordPreview
-              key={`preview-${Math.random()}`}
-              hideLevel={Number(level)}
-              title="Countries"
-              items={["Spain", "Brazil", "Canada", "Chad", "Cyprus"]}
-              category="geography"
-              author="gabrieleiro"
-            />
-          ))}
-      </main>
-      <div className="absolute bottom-8 left-8">
-        <Button type="button" value="Back to editing" />
-      </div>
-      <div className="absolute bottom-8 right-8">
-        <Button type="button" value="Done" />
-      </div>
+      <Page title="Preview">
+        <main className="flex gap-x-8">
+          {Object.keys(HideLevel)
+            .filter((k) => !isNaN(Number(k)))
+            .map((level) => (
+              <DiscordPreview
+                key={`preview-${Math.random()}`}
+                hideLevel={Number(level)}
+                title="Countries"
+                items={["Spain", "Brazil", "Canada", "Chad", "Cyprus"]}
+                category="geography"
+                author="gabrieleiro"
+              />
+            ))}
+        </main>
+        <div className="absolute bottom-8 left-8">
+          <Button type="button" value="Back to editing" />
+        </div>
+        <div className="absolute bottom-8 right-8">
+          <Button type="button" value="Done" />
+        </div>
+      </Page>
     </div>
   );
 }

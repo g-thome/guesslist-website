@@ -1,10 +1,10 @@
 export function Page({ children, title }) {
   return (
-    <>
-      <div className="p8">
-        {title && <h1 className="text-white">{title}</h1>}
+    <div className="p8">
+      <div className="py-1 pl-14">
+        <h1 className="text-white text-5xl mb-8 font-semibold">{title}</h1>
         {children}
       </div>
-    </>
+    </div>
   );
 }
