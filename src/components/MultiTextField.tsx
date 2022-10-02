@@ -2,16 +2,21 @@ import { useState, useEffect, KeyboardEvent, ChangeEvent } from "react";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { keygen } from "../keygen";
 import { StyledLabel } from "./StyledLabel";
-import { StyledInput } from "./StyledInput";
+import { TextField } from "./TextField";
 
-export function MultiTextField({ label, onChange }) {
-  interface IItemListItem {
-    text: string;
-    itemId: string;
-  }
+interface IItemListItem {
+  text: string;
+  itemId: string;
+}
 
+type MultiTextFieldProps = {
+  label: string;
+  onChange: Function;
+};
+
+export function MultiTextField({ label, onChange }: MultiTextFieldProps) {
   const [items, setItems] = useState<IItemListItem[]>([
-    { text: "", itemId: "itemslist-0" },
+    { text: "", itemId: "itemlist-0" },
   ]);
   const [focusItemId, setFocusItemId] = useState("");
 
@@ -32,6 +37,7 @@ export function MultiTextField({ label, onChange }) {
   function keyDown(evt: KeyboardEvent<HTMLInputElement>) {
     if (evt.key === "Enter") {
       setItems([...items, { text: "", itemId: keygen("itemslist") }]);
+      return;
     }
 
     if (
@@ -47,6 +53,7 @@ export function MultiTextField({ label, onChange }) {
   }
 
   function onItemChange(evt: ChangeEvent<HTMLInputElement>) {
+    console.log("changed");
     const itemChanged = items.indexOf(
       items.find((i) => i.itemId === evt.target.id)
     );
@@ -59,12 +66,11 @@ export function MultiTextField({ label, onChange }) {
       <StyledLabel>{label}</StyledLabel>
       {items.map((i) => {
         return (
-          <StyledInput
+          <TextField
             onChange={onItemChange}
             autoFocus
             key={i.itemId}
             id={i.itemId}
-            type="text"
             onKeyDown={keyDown}
           />
         );

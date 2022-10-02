@@ -1,10 +1,10 @@
-import '../index.css';
-import { UserContextProvider } from '../context/UserContext';
+import "../index.css";
+import { GlobalState } from "../context/GlobalState";
 
 export default function MyApp({ Component, pageProps }) {
-    return (
-        <UserContextProvider>
-            <Component {...pageProps} />
-        </UserContextProvider>
-    )
+  return (
+    <GlobalState>
+      <Component {...pageProps} />
+    </GlobalState>
+  );
 }

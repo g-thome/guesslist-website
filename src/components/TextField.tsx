@@ -1,24 +1,18 @@
-import { StyledLabel } from "./StyledLabel";
-import { StyledInput } from "./StyledInput";
-import { ChangeEventHandler } from "react";
+import { ChangeEventHandler, InputHTMLAttributes } from "react";
 
-type TextFieldProps = {
-  label: string;
+type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   onChange: ChangeEventHandler<HTMLInputElement>;
   fixHintText?: string;
 };
 
-export function TextField({ label, onChange, ...props }: TextFieldProps) {
+export function TextField({ onChange, ...props }: TextFieldProps) {
   return (
-    <div {...props}>
-      <label>
-        <StyledLabel>{label}</StyledLabel>
-        <StyledInput
-          onChange={onChange}
-          type="text"
-          placeholder="Enter list name"
-        />
-      </label>
-    </div>
+    <input
+      onChange={onChange}
+      type="text"
+      placeholder="Enter list name"
+      className="mt-0.5 py-4 px-8 w-full border-0 rounded-full bg-arsenic outline-0 text-white text-2xl"
+      {...props}
+    />
   );
 }

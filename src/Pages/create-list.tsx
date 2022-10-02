@@ -6,12 +6,13 @@ import { MultiTextField } from "../components/MultiTextField";
 import { CategoryPicker } from "../components/CategoryPicker";
 import { LanguageSelector } from "../components/LanguageSelector";
 import { Page } from "../components/Page";
+import { StyledLabel } from "../components/StyledLabel";
 
 export default function CreateList() {
   const [title, setTitle] = useState("");
   const [items, setItems] = useState<string[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
-  const [language, setLanguage] = useState("");
+  const [language, setLanguage] = useState("english");
 
   function clickNext() {
     const hasEmpty = [title, items, categories, language].some(
@@ -33,13 +34,11 @@ export default function CreateList() {
             onSubmit={clickNext}
             className="flex flex-col w-full max-w-xl gap-y-4"
           >
-            <TextField
-              onChange={(evt) => setTitle(evt.currentTarget.value)}
-              label="Title"
-            />
+            <StyledLabel>Title</StyledLabel>
+            <TextField onChange={(evt) => setTitle(evt.currentTarget.value)} />
             <MultiTextField onChange={setItems} label="Items" />
             <CategoryPicker onChange={setCategories} />
-            <LanguageSelector onSelect={setLanguage} className="mb-1" />
+            <LanguageSelector onSelect={setLanguage} />
           </form>
           <Button
             className="absolute right-4 bottom-4"

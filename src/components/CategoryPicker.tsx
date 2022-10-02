@@ -37,8 +37,8 @@ const categories = [
 ];
 
 export function CategoryPicker({ onChange }) {
-  const [suggestions, setSuggestions] = useState([]);
-  const [categoriesSelected, setCategoriesSelected] = useState([]);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [categoriesSelected, setCategoriesSelected] = useState<string[]>([]);
   const [text, setText] = useState("");
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export function CategoryPicker({ onChange }) {
   }, [categoriesSelected, onChange]);
 
   function matchSearch(search: string) {
-    const matches = new Set();
+    const matches = new Set<string>();
     categories.map((c) => {
       if (
         c.toLowerCase().includes(search.toLowerCase()) &&
@@ -80,6 +80,8 @@ export function CategoryPicker({ onChange }) {
       if (suggestions.length > 0) {
         pickSuggestion(suggestions[0]);
       }
+
+      return;
     }
 
     if (["Backspace", "Delete"].includes(evt.key)) {
@@ -88,6 +90,8 @@ export function CategoryPicker({ onChange }) {
       } else {
         setSuggestions(matchSearch(txt));
       }
+
+      return;
     }
   }
 
