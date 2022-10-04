@@ -1,4 +1,5 @@
 import { ChangeEvent, useState, useEffect, KeyboardEvent } from "react";
+import { useDidUpdateEffect } from "../hooks/useDidUpdate";
 import { StyledLabel } from "./StyledLabel";
 
 const categories = [
@@ -36,14 +37,28 @@ const categories = [
   "language",
 ];
 
-export function CategoryPicker({ onChange }) {
+type CategoryPickerProps = {
+  initialValue?: string[];
+  onChange: Function;
+};
+
+export function CategoryPicker({
+  onChange,
+  initialValue,
+}: CategoryPickerProps) {
   const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [categoriesSelected, setCategoriesSelected] = useState<string[]>([]);
+  const [categoriesSelected, setCategoriesSelected] = useState<string[]>(
+    initialValue || []
+  );
   const [text, setText] = useState("");
 
-  useEffect(() => {
+  useDidUpdateEffect(() => {
     onChange(categoriesSelected);
-  }, [categoriesSelected, onChange]);
+  }, [categoriesSelected]);
+
+  useDidUpdateEffect(() => {
+    setCategoriesSelected(initialValue);
+  }, [initialValue]);
 
   function matchSearch(search: string) {
     const matches = new Set<string>();

@@ -47,7 +47,7 @@ type DraftAction =
 const DraftContext = createContext<{ draft: IDraft; dispatch: Function }>({
   draft: {
     title: "",
-    items: [],
+    items: [""],
     categories: [],
     language: "",
   },
@@ -57,7 +57,7 @@ const DraftContext = createContext<{ draft: IDraft; dispatch: Function }>({
 function updateState(state: IDraft, prop: string, value: string | string[]) {
   const newState = { ...state };
   newState[prop] = value;
-  window.localStorage.setItem("draft", JSON.stringify(newState));
+  localStorage.setItem("draft", JSON.stringify(newState));
   return newState;
 }
 
@@ -84,7 +84,7 @@ export function DraftContextProvider({ children }) {
   const initialDraft = useMemo(
     () => ({
       title: "",
-      items: [],
+      items: [""],
       categories: [],
       language: "",
     }),
@@ -97,17 +97,14 @@ export function DraftContextProvider({ children }) {
   );
 
   useEffect(() => {
-    dispatch({
-      type: DraftActionType.SET,
-      newDraft: JSON.parse(window.localStorage.getItem("draft")),
-    });
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (draft !== initialDraft) {
-      window.localStorage.setItem("draft", JSON.stringify(draft));
+    const savedDraft = localStorage.getItem("draft");
+    if (savedDraft !== JSON.stringify(initialDraft)) {
+      dispatch({
+        type: DraftActionType.SET,
+        newDraft: JSON.parse(savedDraft),
+      });
     }
-  }, [draft, initialDraft]);
+  }, []);
 
   return (
     <DraftContext.Provider value={{ draft, dispatch }}>

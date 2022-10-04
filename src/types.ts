@@ -15,3 +15,10 @@ export interface IDiscordAPIUser {
     premium_type?: number
     public_flags?: number
 }
+
+export interface IList {
+    title: string
+    items: string[]
+    categories: string[]
+    language: string
+}

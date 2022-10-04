@@ -3,6 +3,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { keygen } from "../keygen";
 import { StyledLabel } from "./StyledLabel";
 import { TextField } from "./TextField";
+import { useDidUpdateEffect } from "../hooks/useDidUpdate";
 
 interface IItemListItem {
   text: string;
@@ -12,21 +13,31 @@ interface IItemListItem {
 type MultiTextFieldProps = {
   label: string;
   onChange: Function;
+  initialValue: string[];
 };
 
-export function MultiTextField({ label, onChange }: MultiTextFieldProps) {
+export function MultiTextField({
+  label,
+  onChange,
+  initialValue,
+}: MultiTextFieldProps) {
   const [items, setItems] = useState<IItemListItem[]>([
     { text: "", itemId: "itemlist-0" },
   ]);
   const [focusItemId, setFocusItemId] = useState("");
 
-  useEffect(() => {
+  useDidUpdateEffect(() => {
     document.getElementById(focusItemId)?.focus();
   }, [focusItemId]);
 
   useEffect(() => {
-    onChange(items.map((item) => item.text));
-  }, [items, onChange]);
+    setItems(
+      initialValue.map((v, i) => ({
+        text: v,
+        itemId: "itemlist-" + i,
+      }))
+    );
+  }, [initialValue]);
 
   function addField() {
     const id = keygen("itemslist");
@@ -45,6 +56,11 @@ export function MultiTextField({ label, onChange }: MultiTextFieldProps) {
       items.length > 1 &&
       evt.currentTarget.value === ""
     ) {
+      onChange(
+        items
+          .filter((i) => i.itemId !== evt.currentTarget.id)
+          .map((i) => i.text)
+      );
       setItems(items.filter((i) => i.itemId !== evt.currentTarget.id));
       const previous =
         items.findIndex((i) => i.itemId === evt.currentTarget.id) - 1;
@@ -53,11 +69,11 @@ export function MultiTextField({ label, onChange }: MultiTextFieldProps) {
   }
 
   function onItemChange(evt: ChangeEvent<HTMLInputElement>) {
-    console.log("changed");
     const itemChanged = items.indexOf(
       items.find((i) => i.itemId === evt.target.id)
     );
     items[itemChanged].text = evt.target.value;
+    onChange(items.map((i) => i.text));
     setItems([...items]);
   }
 
@@ -72,6 +88,7 @@ export function MultiTextField({ label, onChange }: MultiTextFieldProps) {
             key={i.itemId}
             id={i.itemId}
             onKeyDown={keyDown}
+            value={i.text}
           />
         );
       })}
