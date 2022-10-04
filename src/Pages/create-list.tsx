@@ -1,4 +1,3 @@
-import { useCallback, useEffect, useState } from "react";
 import { UserPlate } from "../components/UserPlate";
 import { Button } from "../components/Button";
 import { TextField } from "../components/TextField";
@@ -8,9 +7,11 @@ import { LanguageSelector } from "../components/LanguageSelector";
 import { Page } from "../components/Page";
 import { StyledLabel } from "../components/StyledLabel";
 import { DraftActionType, useDraftContext } from "../context/DraftContext";
+import { useRouter } from "next/router";
 
 export default function CreateList() {
   const { draft, dispatch } = useDraftContext();
+  const router = useRouter();
 
   function setTitle(title: string) {
     dispatch({ type: DraftActionType.UPDATE_TITLE, title });
@@ -29,13 +30,22 @@ export default function CreateList() {
   }
 
   function clickNext() {
-    // const hasEmpty = [title, items, categories, language].some(
-    //   (v) => !v || v.length === 0
-    // );
-    // if (hasEmpty) {
-    //   alert("Please fill in all fields");
-    //   return;
-    // }
+    if (!draft.title || !draft.categories || !draft.items || !draft.language) {
+      alert("Please fill all the fields");
+      return;
+    }
+
+    if (draft.categories.length === 0) {
+      alert("Select at least one category");
+      return;
+    }
+
+    if (draft.items.length < 5) {
+      alert("Lists need to have at least five items");
+      return;
+    }
+
+    router.push("/preview");
   }
 
   return (
