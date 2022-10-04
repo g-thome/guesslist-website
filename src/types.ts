@@ -16,9 +16,16 @@ export interface IDiscordAPIUser {
     public_flags?: number
 }
 
-export interface IList {
-    title: string
-    items: string[]
-    categories: string[]
-    language: string
+export interface IDraft {
+  title: string;
+  items: string[];
+  categories: string[];
+  language: string;
+}
+
+export enum ListStatus {
+  DRAFT,
+  IN_REVIEW,
+  NEEDS_CORRECTIONS,
+  PUBLISHED,
 }

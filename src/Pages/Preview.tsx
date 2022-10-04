@@ -2,8 +2,13 @@ import { UserPlate } from "../components/UserPlate";
 import { Avatar } from "../components/Avatar";
 import { Button } from "../components/Button";
 import { Page } from "../components/Page";
+import { useDraftContext } from "../context/DraftContext";
+import { useUserContext } from "../context/UserContext";
+import { API } from "../API";
+import { useRouter } from "next/router";
 
 const asteriskify = (str: string) => "*".repeat(str.length);
+const hashtagify = (list: string[]) => "#" + list.join(" #");
 
 enum HideLevel {
   ALL,
@@ -14,7 +19,7 @@ enum HideLevel {
 interface IDiscordPreviewProps {
   hideLevel: HideLevel;
   items: string[];
-  category: string;
+  categories: string[];
   author: string;
   title: string;
 }
@@ -22,7 +27,7 @@ interface IDiscordPreviewProps {
 function DiscordPreview({
   hideLevel,
   items,
-  category,
+  categories,
   author,
   title,
 }: IDiscordPreviewProps) {
@@ -66,7 +71,7 @@ function DiscordPreview({
               </li>
             ))}
           </ol>
-          <p className="mb-0 text-sm">#{category}</p>
+          <p className="mb-0 text-sm">{hashtagify(categories)}</p>
           <p className="mt-0 text-0.8 text-xs">
             by <span>@{author}</span>
           </p>
@@ -77,6 +82,19 @@ function DiscordPreview({
 }
 
 export default function PreviewPage() {
+  const { draft } = useDraftContext();
+  const { user } = useUserContext();
+  const router = useRouter();
+
+  async function handleClickDone() {
+    try {
+      await API.publishList(user.id, draft);
+      router.push("/all-done");
+    } catch (e) {
+      alert(e.message);
+    }
+  }
+
   return (
     <div className="p-8">
       <UserPlate className="mb-4" />
@@ -88,10 +106,10 @@ export default function PreviewPage() {
               <DiscordPreview
                 key={`preview-${Math.random()}`}
                 hideLevel={Number(level)}
-                title="Countries"
-                items={["Spain", "Brazil", "Canada", "Chad", "Cyprus"]}
-                category="geography"
-                author="gabrieleiro"
+                title={draft.title}
+                items={draft.items}
+                categories={draft.categories}
+                author={user.username}
               />
             ))}
         </main>
@@ -99,7 +117,7 @@ export default function PreviewPage() {
           <Button type="button" value="Back to editing" />
         </div>
         <div className="absolute bottom-8 right-8">
-          <Button type="button" value="Done" />
+          <Button type="button" value="Done" onClick={handleClickDone} />
         </div>
       </Page>
     </div>
