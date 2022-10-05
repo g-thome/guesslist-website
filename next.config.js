@@ -3,6 +3,15 @@ module.exports = {
     styledComponents: true,
   },
   images: {
-    domains: ['cdn.discordapp.com'],
-  }
+    domains: ["cdn.discordapp.com"],
+  },
+  redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/my-lists",
+        permanent: true,
+      },
+    ];
+  },
 };

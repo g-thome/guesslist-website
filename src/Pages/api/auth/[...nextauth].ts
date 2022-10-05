@@ -6,7 +6,6 @@ import {
   DISCORD_API_USER_INFO,
 } from "../../../constants";
 import { IDiscordAPIUser } from "../../../types";
-import User from "../../user";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -30,6 +29,9 @@ export const authOptions: NextAuthOptions = {
       session.user = { ...session.user, ...(token.profile as IDiscordAPIUser) };
       return session;
     },
+  },
+  pages: {
+    signIn: "/login",
   },
 };
 export default NextAuth(authOptions);
