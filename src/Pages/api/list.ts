@@ -37,13 +37,13 @@ export default function handler(
 
         if (title) {
           const list = await getListByTitle(title as string);
-          res.status(200).json({ list });
+          res.status(200).json(list);
           resolve();
         }
 
         if (authorId) {
           const list = await getListsByAuthor(authorId as string);
-          res.status(200).json({ list });
+          res.status(200).json(list);
           resolve();
         }
       }

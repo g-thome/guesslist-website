@@ -13,11 +13,26 @@ export class API {
     });
   }
 
+  static get(endpoint: string) {
+    return fetch(API_URL + endpoint, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
   static async publishList(authorId: string, list: IDraft) {
     const response = await API.post("/list", {
       authorId,
       ...list,
     });
+    return response.json();
+  }
+
+  static async getUserLists(userId: string) {
+    const response = await API.get("/list?authorId=" + userId);
     return response.json();
   }
 }

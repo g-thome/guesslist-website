@@ -1,11 +1,14 @@
 import { UserPlate } from "../components/UserPlate";
-import { Avatar } from "../components/Avatar";
 import { Button } from "../components/Button";
 import { Page } from "../components/Page";
 import { useDraftContext } from "../context/DraftContext";
-import { useUserContext } from "../context/UserContext";
 import { API } from "../API";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+import { unstable_getServerSession } from "next-auth";
+import { GetServerSidePropsContext } from "next";
+import { authOptions } from "./api/auth/[...nextauth]";
+import { BotAvatar } from "../components/BotAvatar";
 
 const asteriskify = (str: string) => "*".repeat(str.length);
 const hashtagify = (list: string[]) => "#" + list.join(" #");
@@ -48,7 +51,7 @@ function DiscordPreview({
 
   return (
     <div className="flex">
-      <Avatar className="mr-4" />
+      <BotAvatar className="mr-4" />
       <div className="flex flex-col">
         <div className="flex items-end">
           <span className="text-white text-xl font-medium leading-4">
@@ -83,12 +86,12 @@ function DiscordPreview({
 
 export default function PreviewPage() {
   const { draft } = useDraftContext();
-  const { user } = useUserContext();
+  const { data: session } = useSession();
   const router = useRouter();
 
   async function handleClickDone() {
     try {
-      await API.publishList(user.id, draft);
+      await API.publishList(session.user.id, draft);
       router.push("/all-done");
     } catch (e) {
       alert(e.message);
@@ -109,7 +112,7 @@ export default function PreviewPage() {
                 title={draft.title}
                 items={draft.items}
                 categories={draft.categories}
-                author={user.username}
+                author={session.user.username}
               />
             ))}
         </main>
@@ -122,4 +125,16 @@ export default function PreviewPage() {
       </Page>
     </div>
   );
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  return {
+    props: {
+      session: await unstable_getServerSession(
+        context.req,
+        context.res,
+        authOptions
+      ),
+    },
+  };
 }

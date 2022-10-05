@@ -1,14 +1,16 @@
 import Image from "next/image";
-import { useUserContext } from "../context/UserContext";
 
-export function Avatar({ ...props }) {
-  const { user } = useUserContext();
+type AvatarProps = {
+  src: string;
+  alt: string;
+};
 
+export function Avatar({ src, alt, ...props }: AvatarProps) {
   return (
     <div {...props}>
       <Image
-        alt="Your discord user avatar"
-        src={user.avatar}
+        alt={alt}
+        src={src}
         width={50}
         height={50}
         layout="fixed"

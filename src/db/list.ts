@@ -31,3 +31,11 @@ export function getListByTitle(title: string) {
     },
   });
 }
+
+export function getListsWaitingForReview() {
+  return prisma.list.findMany({
+    where: {
+      status: ListStatus.IN_REVIEW,
+    },
+  });
+}

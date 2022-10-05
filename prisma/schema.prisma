@@ -17,7 +17,7 @@ model list {
   categories String[]
   language String
   authorId String
-  status Int
+  status String
   impressions Int
   clears Int
   skips Int
