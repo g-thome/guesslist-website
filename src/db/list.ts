@@ -6,7 +6,7 @@ export function createList(authorId: string, list: IDraft) {
     data: {
       ...list,
       status: ListStatus.IN_REVIEW,
-      impressions: 0,
+      plays: 0,
       clears: 0,
       skips: 0,
       likes: 0,
@@ -36,6 +36,32 @@ export function getListsWaitingForReview() {
   return prisma.list.findMany({
     where: {
       status: ListStatus.IN_REVIEW,
+    },
+  });
+}
+
+export function createDraft(authorId: string) {
+  return prisma.list.create({
+    data: {
+      title: "",
+      items: [""],
+      categories: [],
+      language: "english",
+      clears: 0,
+      skips: 0,
+      likes: 0,
+      dislikes: 0,
+      plays: 0,
+      status: ListStatus.DRAFT,
+      authorId,
+    },
+  });
+}
+
+export function getListById(id: string) {
+  return prisma.list.findFirst({
+    where: {
+      id,
     },
   });
 }

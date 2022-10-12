@@ -1,5 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { createList, getListByTitle, getListsByAuthor } from "../../db/list";
+import {
+  createList,
+  getListById,
+  getListByTitle,
+  getListsByAuthor,
+} from "../../db/list";
 
 export default function handler(
   req: NextApiRequest,
@@ -30,9 +35,9 @@ export default function handler(
         const { title, authorId } = req.query;
 
         if (!title && !authorId) {
-          res
-            .status(400)
-            .json({ error: "you need to pass either list title of authorId" });
+          res.status(400).json({
+            error: "you need to pass either list title or authorId",
+          });
         }
 
         if (title) {

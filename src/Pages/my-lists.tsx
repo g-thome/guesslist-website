@@ -10,12 +10,22 @@ import { authOptions } from "./api/auth/[...nextauth]";
 import { GetServerSidePropsContext } from "next";
 import { API } from "../API";
 
-export default function MyLists({ lists }) {
+export default function MyLists({ lists, firstList, draft }) {
   return (
     <div className="p-8">
       <UserPlate />
       <Page title="My Lists">
-        {lists.length > 0 ? (
+        {firstList ? (
+          <div>
+            <p className="text-white">
+              You don&apos;t have any lists yet. Do you want to{" "}
+              <Link href={`/lists/${draft.id}/edit`}>
+                <a className="text-veryLightBlue">create one</a>
+              </Link>
+              ?
+            </p>
+          </div>
+        ) : (
           <ul className="text-white text-xl">
             {lists.map((l, i) => (
               <li key={"list" + i}>
@@ -27,16 +37,6 @@ export default function MyLists({ lists }) {
               </li>
             ))}
           </ul>
-        ) : (
-          <div>
-            <p className="text-white">
-              You don&apos;t have any lists yet. Do you want to{" "}
-              <Link href={"/create-list"}>
-                <a className="text-veryLightBlue">create one</a>
-              </Link>
-              ?
-            </p>
-          </div>
         )}
       </Page>
     </div>
@@ -51,13 +51,31 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   );
 
   const lists = await API.getUserLists(session.user.id);
+
+  if (lists.length === 0) {
+    const draft = await API.createDraft(session.user.id);
+    return {
+      props: {
+        session,
+        draft,
+        firstList: true,
+      },
+    };
+  }
+
+  if (lists.length === 1 && lists[0].title === "") {
+    return {
+      props: {
+        session,
+        draft: lists[0],
+        firstList: true,
+      },
+    };
+  }
+
   return {
     props: {
-      session: await unstable_getServerSession(
-        context.req,
-        context.res,
-        authOptions
-      ),
+      session,
       lists,
     },
   };

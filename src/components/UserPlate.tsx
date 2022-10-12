@@ -3,6 +3,7 @@ import { UserAvatar } from "./UserAvatar";
 
 export function UserPlate({ ...props }) {
   const { data: session } = useSession();
+  console.log("session: ", session);
 
   return (
     <div {...props}>

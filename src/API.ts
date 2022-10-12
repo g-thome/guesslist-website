@@ -1,5 +1,5 @@
 import { API_URL } from "./constants";
-import { IDraft } from "./types";
+import { IDraft, IList } from "./types";
 
 export class API {
   static post(endpoint: string, body: any) {
@@ -34,5 +34,14 @@ export class API {
   static async getUserLists(userId: string) {
     const response = await API.get("/list?authorId=" + userId);
     return response.json();
+  }
+
+  static async getList(id: string): Promise<IList> {
+    const response = await API.get("/list/" + id);
+    return response.json();
+  }
+
+  static async createDraft(userId: string) {
+    return API.post("/create-draft", { authorId: userId });
   }
 }

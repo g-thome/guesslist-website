@@ -1,14 +1,13 @@
-import { UserPlate } from "../components/UserPlate";
-import { Button } from "../components/Button";
-import { Page } from "../components/Page";
-import { useDraftContext } from "../context/DraftContext";
-import { API } from "../API";
+import { UserPlate } from "../../../components/UserPlate";
+import { Button } from "../../../components/Button";
+import { Page } from "../../../components/Page";
+import { API } from "../../../API";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { unstable_getServerSession } from "next-auth";
 import { GetServerSidePropsContext } from "next";
-import { authOptions } from "./api/auth/[...nextauth]";
-import { BotAvatar } from "../components/BotAvatar";
+import { authOptions } from "../../api/auth/[...nextauth]";
+import { BotAvatar } from "../../../components/BotAvatar";
 
 const asteriskify = (str: string) => "*".repeat(str.length);
 const hashtagify = (list: string[]) => "#" + list.join(" #");
@@ -84,8 +83,7 @@ function DiscordPreview({
   );
 }
 
-export default function PreviewPage() {
-  const { draft } = useDraftContext();
+export default function PreviewPage({ draft }) {
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -128,6 +126,7 @@ export default function PreviewPage() {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const draft = await API.getList(context.query.id as string);
   return {
     props: {
       session: await unstable_getServerSession(
@@ -135,6 +134,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         context.res,
         authOptions
       ),
+      draft,
     },
   };
 }
