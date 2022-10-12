@@ -8,16 +8,14 @@ module.exports = {
     fontFamily: {
       sans: ["Inter", "sans-serif"],
     },
-    extend: {
-      colors: {
-        onyx: "#36393f",
-        veryLightBlue: "#5966f3",
-        white: "#ffffff",
-        arsenic: "#40434c",
-        silverFoil: "#aeb0b3",
-        gray: "#b9bbbe",
-        darkCharcoal: "#363530",
-      },
+    colors: {
+      onyx: "#36393f",
+      veryLightBlue: "#5966f3",
+      white: "#ffffff",
+      arsenic: "#40434c",
+      silverFoil: "#aeb0b3",
+      gray: "#b9bbbe",
+      darkCharcoal: "#363530",
     },
   },
   plugins: [],
