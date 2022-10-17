@@ -6,7 +6,7 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { GetServerSidePropsContext } from "next";
-import { API } from "../API";
+import { createDraft, getUserLists } from "../API";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { ListStatus } from "@prisma/client";
@@ -16,7 +16,7 @@ export default function MyLists({ lists }) {
   const router = useRouter();
 
   async function handleCreateOneClick() {
-    const draft = await API.createDraft(session.user.id);
+    const draft = await createDraft(session.user.id);
     router.push(`/lists/${draft.id}/edit`);
   }
 
@@ -63,7 +63,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     authOptions
   );
 
-  const lists = await API.getUserLists(session.user.id);
+  const lists = await getUserLists(session.user.id);
 
   return {
     props: {

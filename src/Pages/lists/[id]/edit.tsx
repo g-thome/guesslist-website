@@ -8,7 +8,7 @@ import { Page } from "../../../components/Page";
 import { StyledLabel } from "../../../components/StyledLabel";
 import { useRouter } from "next/router";
 import { GetServerSidePropsContext } from "next";
-import { API } from "../../../API";
+import { getList } from "../../../API";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]";
 import { useState } from "react";
@@ -84,7 +84,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     authOptions
   );
 
-  const draft = await API.getList(context.params.id as string);
+  const draft = await getList(context.params.id as string);
 
   return {
     props: {

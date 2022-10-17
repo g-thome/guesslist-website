@@ -1,7 +1,7 @@
 import { UserPlate } from "../../../components/UserPlate";
 import { Button } from "../../../components/Button";
 import { Page } from "../../../components/Page";
-import { API } from "../../../API";
+import { getList, publishList } from "../../../API";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { unstable_getServerSession } from "next-auth";
@@ -89,7 +89,7 @@ export default function PreviewPage({ draft }) {
 
   async function handleClickDone() {
     try {
-      await API.publishList(session.user.id, draft);
+      await publishList(session.user.id, draft);
       router.push("/all-done");
     } catch (e) {
       alert(e.message);
@@ -126,7 +126,7 @@ export default function PreviewPage({ draft }) {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const draft = await API.getList(context.query.id as string);
+  const draft = await getList(context.query.id as string);
   return {
     props: {
       session: await unstable_getServerSession(
