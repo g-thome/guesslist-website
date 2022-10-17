@@ -3,13 +3,13 @@ import { UserPlate } from "../components/UserPlate";
 import { Page } from "../components/Page";
 import EditIcon from "@mui/icons-material/Edit";
 import BarChartIcon from "@mui/icons-material/BarChart";
-import { ListStatus } from "../types";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { GetServerSidePropsContext } from "next";
 import { API } from "../API";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { ListStatus } from "@prisma/client";
 
 export default function MyLists({ lists }) {
   const { data: session } = useSession();

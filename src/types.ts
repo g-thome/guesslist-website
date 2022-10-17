@@ -25,13 +25,6 @@ export interface IDraft {
   language: string;
 }
 
-export enum ListStatus {
-  DRAFT = "Draft",
-  IN_REVIEW = "In review",
-  NEEDS_CORRECTIONS = "Needs corrections",
-  PUBLISHED = "Published",
-}
-
 export interface IList {
   id: string;
   title: string;
