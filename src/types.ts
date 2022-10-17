@@ -25,15 +25,6 @@ export interface IDraft {
   language: string;
 }
 
-export interface IList {
-  id: string;
-  title: string;
-  items: string[];
-  categories: string[];
-  language: string;
-  authorId: string;
-}
-
 declare module "next-auth" {
   /**
    * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
