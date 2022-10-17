@@ -1,5 +1,6 @@
 import { API_URL } from "./constants";
-import { IDraft, IList } from "./types";
+import { IDraft } from "./types";
+import { List } from "@prisma/client";
 
 export class API {
   static post(endpoint: string, body: any) {
@@ -36,12 +37,12 @@ export class API {
     return response.json();
   }
 
-  static async getList(id: string): Promise<IList> {
+  static async getList(id: string): Promise<List> {
     const response = await API.get("/list/" + id);
     return response.json();
   }
 
-  static async createDraft(userId: string): Promise<IList> {
+  static async createDraft(userId: string): Promise<List> {
     const response = await API.post("/create-draft", { authorId: userId });
     return response.json();
   }
