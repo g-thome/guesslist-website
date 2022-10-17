@@ -16,6 +16,7 @@ export default function handler(
 
       if (!authorId) {
         res.status(400).json({ error: "authorId missing in request body" });
+        resolve();
       }
 
       const { id } = await createDraft(authorId);
