@@ -7,11 +7,6 @@ export function createList(authorId: string, list: IDraft) {
     data: {
       ...list,
       status: ListStatus.IN_REVIEW,
-      plays: 0,
-      clears: 0,
-      skips: 0,
-      likes: 0,
-      dislikes: 0,
       authorId,
     },
   });
@@ -48,11 +43,6 @@ export function createDraft(authorId: string) {
       items: [""],
       categories: [],
       language: "english",
-      clears: 0,
-      skips: 0,
-      likes: 0,
-      dislikes: 0,
-      plays: 0,
       status: ListStatus.DRAFT,
       authorId,
     },
