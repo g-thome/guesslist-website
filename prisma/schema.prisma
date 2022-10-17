@@ -23,8 +23,9 @@ model List {
   skips Skip[]
   likes Like[]
   dislikes Dislike[]
+  objection String?
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt 
+  updatedAt DateTime @updatedAt
 }
 
 model Like {
@@ -32,7 +33,6 @@ model Like {
   listId String
   list List @relation(fields: [listId], references: [id])
   userId String
-  user User @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
 }
 
@@ -41,7 +41,6 @@ model Dislike {
   listId String
   list List @relation(fields: [listId], references: [id])
   userId String
-  user User @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
 }
 
@@ -64,14 +63,6 @@ model Play {
   list List @relation(fields: [listId], references: [id])
   guildId String @unique
   createdAt DateTime @default(now())
-}
-
-model Objection {
-  text String
-  listId String
-  list List @relation(fields: [listId], references: [id])
-  createdAt DateTime @default(now())
-  deletedAt DateTime
 }
 
 enum Category {
