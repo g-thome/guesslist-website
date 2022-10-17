@@ -7,7 +7,7 @@ export class API {
       method: "POST",
       mode: "cors",
       headers: {
-        "Contet-Type": "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
     });
