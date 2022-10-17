@@ -41,7 +41,8 @@ export class API {
     return response.json();
   }
 
-  static async createDraft(userId: string) {
-    return API.post("/create-draft", { authorId: userId });
+  static async createDraft(userId: string): Promise<IList> {
+    const response = await API.post("/create-draft", { authorId: userId });
+    return response.json();
   }
 }
