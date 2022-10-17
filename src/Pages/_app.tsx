@@ -14,9 +14,7 @@ export default function MyApp({
       </Head>
       <SessionProvider session={session}>
         <GlobalState>
-          <div className="bg-onyx">
-            <Component {...pageProps} />
-          </div>
+          <Component {...pageProps} />
         </GlobalState>
       </SessionProvider>
     </>
