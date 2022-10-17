@@ -43,7 +43,7 @@ export default function EditList({ draft }) {
   return (
     <div className="p-8">
       <UserPlate />
-      <Page title="Create your first list!">
+      <Page title="Edit your list">
         <main>
           <form
             onSubmit={clickNext}
