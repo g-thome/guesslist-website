@@ -29,7 +29,10 @@ export default function MyLists({ lists }) {
             {lists.map((l, i) => (
               <li key={"list" + i}>
                 {l.title || "Untitled"} - {l.status}{" "}
-                <EditIcon className="text-veryLightBlue cursor-pointer" />{" "}
+                <EditIcon
+                  onClick={() => router.push(`/lists/${l.id}/edit`)}
+                  className="text-veryLightBlue cursor-pointer"
+                />{" "}
                 {l.status === ListStatus.PUBLISHED && (
                   <BarChartIcon className="text-veryLightBlue cursor-pointer" />
                 )}
