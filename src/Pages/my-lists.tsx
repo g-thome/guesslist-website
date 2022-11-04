@@ -9,9 +9,13 @@ import { GetServerSidePropsContext } from "next";
 import { createDraft, getUserLists } from "../API";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { ListStatus } from "@prisma/client";
+import { List, ListStatus } from "@prisma/client";
 
-export default function MyLists({ lists }) {
+type MyListsProps = {
+  lists: List[];
+};
+
+export default function MyLists({ lists }: MyListsProps) {
   const { data: session } = useSession();
   const router = useRouter();
 
