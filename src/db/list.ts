@@ -1,6 +1,6 @@
 import { prisma } from "./prisma";
 import { IDraft } from "../types";
-import { ListStatus } from "@prisma/client";
+import { List, ListStatus } from "@prisma/client";
 
 export function createList(authorId: string, list: IDraft) {
   return prisma.list.create({
@@ -54,5 +54,12 @@ export function getListById(id: string) {
     where: {
       id,
     },
+  });
+}
+
+export function updateList(id: string, data: Partial<List>) {
+  return prisma.list.update({
+    where: { id },
+    data,
   });
 }

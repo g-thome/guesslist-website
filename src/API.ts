@@ -23,6 +23,17 @@ function get(endpoint: string) {
   });
 }
 
+function patch(endpoint: string, body: any) {
+  return fetch(API_URL + endpoint, {
+    method: "PATCH",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+}
+
 export async function publishList(authorId: string, list: IDraft) {
   const response = await post("/list", {
     authorId,
@@ -43,5 +54,10 @@ export async function getList(id: string): Promise<List> {
 
 export async function createDraft(userId: string): Promise<List> {
   const response = await post("/create-draft", { authorId: userId });
+  return response.json();
+}
+
+export async function updateList(listId: string, data: Partial<List>) {
+  const response = await patch(`/list/${listId}`, data);
   return response.json();
 }
