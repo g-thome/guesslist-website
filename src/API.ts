@@ -37,7 +37,7 @@ export async function getUserLists(userId: string) {
 }
 
 export async function getList(id: string): Promise<List> {
-  const response = await get("/list/" + id);
+  const response = await get(`/list/${id}`);
   return response.json();
 }
 
