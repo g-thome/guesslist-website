@@ -16,6 +16,8 @@ module.exports = {
       silverFoil: "#aeb0b3",
       gray: "#b9bbbe",
       darkCharcoal: "#363530",
+      black: "#000000",
+      green: "#369958",
     },
   },
   plugins: [],
