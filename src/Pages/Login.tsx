@@ -12,7 +12,7 @@ export default function Login() {
       <button
         onClick={() =>
           signIn("discord", {
-            callbackUrl: "/my-lists",
+            callbackUrl: "/my/drafts",
           })
         }
         className="cursor-pointer bg-veryLightBlue outline-none border-0 py-2 px-4 text-white w-fit"
