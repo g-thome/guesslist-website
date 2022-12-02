@@ -135,7 +135,7 @@ export function CategoryPicker({
                 )
               )
             }
-            className="text-arsenic bg-gray px-2 py-1 rounded text-center mr-1 inline cursor-pointer"
+            className="text-arsenic bg-gray px-2 py-1 rounded text-center mr-1 inline cursor-pointer hover:bg-red hover:text-white"
           >
             #{c}
           </li>
