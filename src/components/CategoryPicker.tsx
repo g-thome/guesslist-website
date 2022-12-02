@@ -89,24 +89,12 @@ export function CategoryPicker({
   }
 
   function keyDown(evt: KeyboardEvent<HTMLInputElement>) {
-    const txt = evt.currentTarget.value;
-
-    if (evt.key === "Enter") {
-      if (suggestions.length > 0) {
-        pickSuggestion(suggestions[0]);
-      }
-
+    if (evt.key !== "Enter") {
       return;
     }
 
-    if (["Backspace", "Delete"].includes(evt.key)) {
-      if (txt === "") {
-        setCategoriesSelected(categoriesSelected.slice(0, -1));
-      } else {
-        setSuggestions(matchSearch(txt));
-      }
-
-      return;
+    if (suggestions.length > 0) {
+      pickSuggestion(suggestions[0]);
     }
   }
 
