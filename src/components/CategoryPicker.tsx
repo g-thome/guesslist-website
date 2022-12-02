@@ -123,20 +123,22 @@ export function CategoryPicker({
   return (
     <div className="flex flex-col">
       <StyledLabel>Categories</StyledLabel>
-      <div
-        onClick={focus}
-        className="mt-0.5 py-4 px-8 w-full border-0 rounded-full bg-arsenic outline-0 text-white text-2xl cursor-text"
-      >
+      <ul className="mt-2 mb-4">
         {categoriesSelected
           .map((c) => "#" + c)
           .map((c) => (
-            <span
+            <li
               key={c}
               className="text-arsenic bg-gray px-2 py-1 rounded text-center mr-1 inline"
             >
               {c}
-            </span>
+            </li>
           ))}
+      </ul>
+      <div
+        onClick={focus}
+        className="mt-0.5 py-4 px-8 w-full border-0 rounded-full bg-arsenic outline-0 text-white text-2xl cursor-text"
+      >
         <input
           id="categoriesInput"
           onChange={onInput}
