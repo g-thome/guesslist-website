@@ -124,16 +124,22 @@ export function CategoryPicker({
     <div className="flex flex-col">
       <StyledLabel>Categories</StyledLabel>
       <ul className="mt-2 mb-4">
-        {categoriesSelected
-          .map((c) => "#" + c)
-          .map((c) => (
-            <li
-              key={c}
-              className="text-arsenic bg-gray px-2 py-1 rounded text-center mr-1 inline"
-            >
-              {c}
-            </li>
-          ))}
+        {categoriesSelected.map((c) => (
+          <li
+            key={c}
+            data-value={c}
+            onClick={(evt) =>
+              setCategoriesSelected(
+                categoriesSelected.filter(
+                  (c) => c !== evt.currentTarget.dataset.value
+                )
+              )
+            }
+            className="text-arsenic bg-gray px-2 py-1 rounded text-center mr-1 inline cursor-pointer"
+          >
+            #{c}
+          </li>
+        ))}
       </ul>
       <div
         onClick={focus}
