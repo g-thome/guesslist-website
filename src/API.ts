@@ -57,7 +57,7 @@ export async function createDraft(userId: string): Promise<List> {
   return response.json();
 }
 
-export async function updateList(listId: string, data: Partial<List>) {
+export async function saveDraft(listId: string, data: Partial<List>) {
   const response = await patch(`/list/${listId}`, data);
   return response.json();
 }
