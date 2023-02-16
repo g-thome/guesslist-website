@@ -110,7 +110,7 @@ export function CategoryPicker({
   return (
     <div className="flex flex-col">
       <StyledLabel>Categories</StyledLabel>
-      <ul className="mt-2 mb-4">
+      <ul className="mt-2 mb-4 flex flex-wrap gap-y-2">
         {categoriesSelected.map((c) => (
           <li
             key={c}
@@ -122,7 +122,7 @@ export function CategoryPicker({
                 )
               )
             }
-            className="text-arsenic bg-gray px-2 py-1 rounded text-center mr-1 inline cursor-pointer hover:bg-red hover:text-white"
+            className="text-arsenic bg-gray px-2 py-1 rounded text-center mr-1 inline cursor-pointer hover:bg-red hover:text-white select-none"
           >
             #{c}
           </li>
