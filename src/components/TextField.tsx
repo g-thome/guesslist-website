@@ -17,7 +17,7 @@ export function TextField({
       type="text"
       placeholder="Enter list name"
       value={initialValue}
-      className="mt-0.5 py-4 px-8 w-full border-0 rounded-full bg-arsenic outline-0 text-white text-2xl"
+      className="mt-0.5 py-4 px-8 w-full border-0 rounded-full bg-arsenic outline-0 text-white text-2xl focus:outline focus:outline-white focus:outline-2"
       {...props}
     />
   );
