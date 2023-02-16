@@ -7,10 +7,11 @@ import { Page } from "../../../components/Page";
 import { StyledLabel } from "../../../components/StyledLabel";
 import { useRouter } from "next/router";
 import { GetServerSidePropsContext } from "next";
-import { getList } from "../../../API";
+import { getList, saveDraft } from "../../../API";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDebounce } from "../../../hooks/useDebounce";
 
 export default function EditList({ draft }) {
   const [title, setTitle] = useState(draft.title);
@@ -18,7 +19,28 @@ export default function EditList({ draft }) {
   const [categories, setCategories] = useState(draft.categories);
   const [language, setLanguage] = useState(draft.language);
 
+  const debouncedTitle = useDebounce(title, 100);
+  const debouncedItems = useDebounce(items, 100);
+  const debouncedCategories = useDebounce(categories, 100);
+  const debouncedLanguage = useDebounce(language, 100);
+
   const router = useRouter();
+
+  useEffect(() => {
+    saveDraft(draft.id, { title: debouncedTitle }).then(() => console.log("saved!"));
+  }, [draft.id, debouncedTitle]);
+
+  useEffect(() => {
+    saveDraft(draft.id, { items: debouncedItems }).then(() => console.log("saved!"));
+  }, [debouncedItems, draft.id]);
+
+  useEffect(() => {
+    saveDraft(draft.id, { categories: debouncedCategories });
+  }, [debouncedCategories, draft.id]);
+
+  useEffect(() => {
+    saveDraft(draft.id, { language: debouncedLanguage });
+  }, [debouncedLanguage, draft.id]);
 
   function clickNext() {
     if (!title || !categories || !items || !language) {

@@ -30,7 +30,7 @@ export default function handler(
       const { title, items, categories, language } = req.body;
       const { id } = req.query;
 
-      if (!title && !items.length && !categories.length && !language) {
+      if (!title && !items?.length && !categories?.length && !language) {
         res
           .status(400)
           .json({ error: "Body must contain a valid update option" });
