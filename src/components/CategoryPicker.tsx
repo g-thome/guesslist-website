@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useEffect, KeyboardEvent } from "react";
+import { ChangeEvent, useState, KeyboardEvent } from "react";
 import { useDidUpdateEffect } from "../hooks/useDidUpdate";
 import { StyledLabel } from "./StyledLabel";
 
@@ -77,7 +77,6 @@ export function CategoryPicker({
 
   function onInput(evt: ChangeEvent<HTMLInputElement>) {
     const txt = evt.target.value;
-
     setText(txt);
 
     if (txt.length === 0) {
@@ -89,24 +88,12 @@ export function CategoryPicker({
   }
 
   function keyDown(evt: KeyboardEvent<HTMLInputElement>) {
-    const txt = evt.currentTarget.value;
-
-    if (evt.key === "Enter") {
-      if (suggestions.length > 0) {
-        pickSuggestion(suggestions[0]);
-      }
-
+    if (evt.key !== "Enter") {
       return;
     }
 
-    if (["Backspace", "Delete"].includes(evt.key)) {
-      if (txt === "") {
-        setCategoriesSelected(categoriesSelected.slice(0, -1));
-      } else {
-        setSuggestions(matchSearch(txt));
-      }
-
-      return;
+    if (suggestions.length > 0) {
+      pickSuggestion(suggestions[0]);
     }
   }
 
@@ -123,43 +110,52 @@ export function CategoryPicker({
   return (
     <div className="flex flex-col">
       <StyledLabel>Categories</StyledLabel>
-      <div
-        onClick={focus}
-        className="mt-0.5 py-4 px-8 w-full border-0 rounded-full bg-arsenic outline-0 text-white text-2xl cursor-text"
-      >
-        {categoriesSelected
-          .map((c) => "#" + c)
-          .map((c) => (
-            <span
-              key={c}
-              className="text-arsenic bg-gray px-2 py-1 rounded text-center mr-1 inline"
-            >
-              {c}
-            </span>
-          ))}
-        <input
-          id="categoriesInput"
-          onChange={onInput}
-          onKeyDown={keyDown}
-          type="text"
-          value={text}
-          className="border-0 outline-0 bg-transparent text-white inline"
-        ></input>
+      <ul className="mt-2 mb-4 flex flex-wrap gap-y-2">
+        {categoriesSelected.map((c) => (
+          <li
+            key={c}
+            data-value={c}
+            onClick={(evt) =>
+              setCategoriesSelected(
+                categoriesSelected.filter(
+                  (c) => c !== evt.currentTarget.dataset.value
+                )
+              )
+            }
+            className="text-arsenic bg-gray px-2 py-1 rounded text-center mr-1 inline cursor-pointer hover:bg-red hover:text-white select-none"
+          >
+            #{c}
+          </li>
+        ))}
+      </ul>
+      <div className="relative">
+        <div onClick={focus} className=" relative">
+          <input
+            id="categoriesInput"
+            onChange={onInput}
+            onKeyDown={keyDown}
+            type="text"
+            value={text}
+            className="border-0 outline-0 inline mt-0.5 py-4 px-8 w-full rounded-full bg-arsenic text-white text-2xl cursor-text focus:outline focus:outline-white focus:outline-2"
+          ></input>
+        </div>
+        {suggestions.length > 0 && (
+          <ul className="list-none mt-2 ml-8 text-white bg-arsenic drop-shadow-md outline-white outline-2 outline rounded p-1 text-sm w-fit not:last:border-b-1 not:last:pb-0.8 not:first:mt-0.8 absolute">
+            {suggestions.map((s) => (
+              <li
+                key={s}
+                onClick={(evt) =>
+                  pickSuggestion(evt.currentTarget.dataset.value)
+                }
+                className="cursor-pointer text-base p-2"
+                data-value={s}
+              >
+                {s}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
-      {suggestions.length > 0 && (
-        <ul className="list-none mt-2 text-white bg-arsenic rounded p-1 text-sm w-fit not:last:border-b-1 not:last:pb-0.8 not:first:mt-0.8">
-          {suggestions.map((s) => (
-            <li
-              key={s}
-              onClick={(evt) => pickSuggestion(evt.currentTarget.dataset.value)}
-              className="cursor-pointer text-base p-2"
-              data-value={s}
-            >
-              {s}
-            </li>
-          ))}
-        </ul>
-      )}
     </div>
   );
 }

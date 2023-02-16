@@ -20,7 +20,8 @@ module.exports = {
         black: "#000000",
         green: "#369958",
         spanishGray: '#96989e',
-        outerSpace: '#42464E'
+        outerSpace: '#42464E',
+        red: '#ED4245'
       }
     }
   },
