@@ -38,14 +38,17 @@ export default function handler(
         return resolve();
       }
 
-      for (let c of categories) {
-        if (!ALLOWED_CATEGORIES.includes(c)) {
-          res
-            .status(400)
-            .json({ error: `Category ${c} not allowed` });
-          return resolve();
+      if (Array.isArray(categories) && categories.length) {
+        for (let c of categories) {
+          if (!ALLOWED_CATEGORIES.includes(c)) {
+            res
+              .status(400)
+              .json({ error: `Category ${c} not allowed` });
+            return resolve();
+          }
         }
       }
+      
 
       try {
         const result = await updateList(id as string, {
