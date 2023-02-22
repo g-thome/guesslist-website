@@ -14,7 +14,7 @@ model List {
   id String @id @default(uuid())
   title String @unique
   items String[]
-  categories Category[]
+  categories String[]
   language String
   authorId String
   status ListStatus
@@ -63,39 +63,6 @@ model Play {
   list List @relation(fields: [listId], references: [id])
   guildId String @unique
   createdAt DateTime @default(now())
-}
-
-enum Category {
-  HISTORY @map("History")
-  GEOGRAPHY @map("Geography")
-  PHYSICS @map("Physics")
-  CHEMISTRY @map("Chemistry")
-  BIOLOGY @map("Biology")
-  MATHEMATICS @map("Mathematics")
-  LITERATURE @map("Literature")
-  MUSIC @map("Music")
-  ART @map("Art")
-  SPORTS @map("Sports")
-  PHILOSOPHY @map("Philosophy")
-  ECONOMY @map("Economy")
-  BUSINESS @map("Business")
-  LAW @map("Law")
-  GAMING @map("Gaming")
-  COMPUTERS @map("Computers")
-  ESPORTS @map("Esports")
-  CELEBRITIES @map("Celebrities")
-  NATURE @map("Nature")
-  ANIMALS @map("Animals")
-  PAINTING_SCULPTURE @map("Painting & Sculpture")
-  ENTERTAINMENT @map("Entertainment")
-  FOOD @map("Food")
-  FASHION @map("Fashion")
-  CARS @map("Cars")
-  ARCHITECTURE @map("Architecture")
-  YOUTUBE_TWITCH @map("Youtube & Twitch")
-  SPACE @map("Space")
-  RELIGION @map("Religion")
-  LANGUAGE @map("Language")
 }
 
 enum ListStatus {

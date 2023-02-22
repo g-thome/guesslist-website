@@ -1,41 +1,7 @@
 import { ChangeEvent, useState, KeyboardEvent } from "react";
 import { useDidUpdateEffect } from "../hooks/useDidUpdate";
 import { StyledLabel } from "./StyledLabel";
-
-const categories = [
-  "history",
-  "geography",
-  "physics",
-  "chemistry",
-  "biology",
-  "mathematics",
-  "literature",
-  "music",
-  "art",
-  "sports",
-  "philosophy",
-  "economy",
-  "business",
-  "law",
-  "gaming",
-  "computers",
-  "internet",
-  "programming",
-  "esports",
-  "celebrities",
-  "nature",
-  "animals",
-  "painting & sculpture",
-  "entertainment",
-  "food",
-  "fashion",
-  "cars",
-  "architecture",
-  "youtube & twitch",
-  "space",
-  "religion",
-  "language",
-];
+import { ALLOWED_CATEGORIES } from "../constants";
 
 type CategoryPickerProps = {
   initialValue?: string[];
@@ -62,7 +28,7 @@ export function CategoryPicker({
 
   function matchSearch(search: string) {
     const matches = new Set<string>();
-    categories.map((c) => {
+    ALLOWED_CATEGORIES.map((c) => {
       if (
         c.toLowerCase().includes(search.toLowerCase()) &&
         !categoriesSelected.includes(c) &&

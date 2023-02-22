@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { ALLOWED_CATEGORIES } from "../../../constants";
 import { getListById, updateList } from "../../../db/list";
 
 export default function handler(
@@ -34,7 +35,16 @@ export default function handler(
         res
           .status(400)
           .json({ error: "Body must contain a valid update option" });
-        resolve();
+        return resolve();
+      }
+
+      for (let c of categories) {
+        if (!ALLOWED_CATEGORIES.includes(c)) {
+          res
+            .status(400)
+            .json({ error: `Category ${c} not allowed` });
+          return resolve();
+        }
       }
 
       try {
@@ -47,7 +57,7 @@ export default function handler(
         res.status(200).json(result);
         resolve();
       } catch (e) {
-        reject(e);
+        return reject(e);
       }
     }
 

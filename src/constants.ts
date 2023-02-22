@@ -7,3 +7,38 @@ export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const ADMIN_ID = process.env.ADMIN_ID;
 export const BOT_AVATAR =
   "https://upload.wikimedia.org/wikipedia/en/e/e4/The_Guess_List.png";
+  
+export const ALLOWED_CATEGORIES = [
+  "history",
+  "geography",
+  "physics",
+  "chemistry",
+  "biology",
+  "mathematics",
+  "literature",
+  "music",
+  "art",
+  "sports",
+  "philosophy",
+  "economy",
+  "business",
+  "law",
+  "gaming",
+  "computers",
+  "internet",
+  "programming",
+  "esports",
+  "celebrities",
+  "nature",
+  "animals",
+  "painting & sculpture",
+  "entertainment",
+  "food",
+  "fashion",
+  "cars",
+  "architecture",
+  "youtube & twitch",
+  "space",
+  "religion",
+  "language",
+];
