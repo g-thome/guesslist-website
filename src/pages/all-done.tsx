@@ -1,3 +1,4 @@
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { Page } from "../components/Page";
 import { UserPlate } from "../components/UserPlate";
@@ -23,4 +24,12 @@ export default function AllDone() {
       </Page>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const session = await getServerSession();
+  
+  return {
+    props: { session },
+  };
 }

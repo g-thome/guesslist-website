@@ -1,5 +1,5 @@
 import { useState, useEffect, KeyboardEvent, ChangeEvent } from "react";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { PlusCircle } from "react-feather";
 import { keygen } from "../keygen";
 import { StyledLabel } from "./StyledLabel";
 import { TextField } from "./TextField";
@@ -92,7 +92,7 @@ export function MultiTextField({
           />
         );
       })}
-      <AddCircleIcon
+      <PlusCircle
         fontSize="large"
         onClick={addField}
         className="mt-1 w-8 h-8 text-gray cursor-pointer"

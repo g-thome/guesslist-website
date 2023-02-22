@@ -6,8 +6,7 @@ import { useRouter } from "next/router";
 import { createDraft, getUserLists } from "../../API";
 import { Page } from "../../components/Page";
 import { authOptions } from "../api/auth/[...nextauth]";
-import EditIcon from "@mui/icons-material/Edit";
-import BarChartIcon from "@mui/icons-material/BarChart";
+import { Edit, BarChart } from "react-feather";
 
 type Props = {
   drafts: List[];
@@ -26,14 +25,14 @@ export default function Drafts({ drafts }: Props) {
       {drafts.length ? (
         <ul className="text-white text-xl">
           {drafts.map((l, i) => (
-            <li key={"list" + i}>
+            <li key={"list" + i} className="flex items-center">
               {l.title || "Untitled"}{" "}
-              <EditIcon
+              <Edit
                 onClick={() => router.push(`/lists/${l.id}/edit`)}
-                className="text-veryLightBlue cursor-pointer"
+                className="text-veryLightBlue cursor-pointer inline ml-2"
               />{" "}
               {l.status === ListStatus.PUBLISHED && (
-                <BarChartIcon className="text-veryLightBlue cursor-pointer" />
+                <BarChart className="text-veryLightBlue cursor-pointer" />
               )}
             </li>
           ))}
