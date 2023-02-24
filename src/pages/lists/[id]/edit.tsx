@@ -8,7 +8,7 @@ import { StyledLabel } from "../../../components/StyledLabel";
 import { useRouter } from "next/router";
 import { GetServerSidePropsContext } from "next";
 import { getList, saveDraft } from "../../../API";
-import { unstable_getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]";
 import { useEffect, useState } from "react";
 import { useDebounce } from "../../../hooks/useDebounce";
@@ -93,7 +93,7 @@ export default function EditList({ draft }) {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await unstable_getServerSession(
+  const session = await getServerSession(
     context.req,
     context.res,
     authOptions
