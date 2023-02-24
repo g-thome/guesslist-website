@@ -1,5 +1,4 @@
 import { DefaultSession } from "next-auth";
-import { Category } from "@prisma/client";
 
 export interface IDiscordAPIUser {
   id: string;
@@ -22,7 +21,7 @@ export interface IDiscordAPIUser {
 export interface IDraft {
   title: string;
   items: string[];
-  categories: Category[];
+  categories: string[];
   language: string;
 }
 
