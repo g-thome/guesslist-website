@@ -4,7 +4,7 @@ import { Page } from "../../../components/Page";
 import { getList, publishList } from "../../../API";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import { unstable_getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 import { GetServerSidePropsContext } from "next";
 import { authOptions } from "../../api/auth/[...nextauth]";
 import { BotAvatar } from "../../../components/BotAvatar";
@@ -129,7 +129,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const draft = await getList(context.query.id as string);
   return {
     props: {
-      session: await unstable_getServerSession(
+      session: await getServerSession(
         context.req,
         context.res,
         authOptions

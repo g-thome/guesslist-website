@@ -1,6 +1,6 @@
 import { List, ListStatus } from "@prisma/client";
 import { GetServerSidePropsContext } from "next";
-import { unstable_getServerSession } from "next-auth";
+import { AuthOptions, getServerSession } from "next-auth";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { createDraft, getUserLists } from "../../API";
@@ -60,7 +60,7 @@ export async function getServerSideProps({
   req,
   res,
 }: GetServerSidePropsContext) {
-  const session = await unstable_getServerSession(req, res, authOptions);
+  const session = await getServerSession(req, res, authOptions);
 
   const drafts = await getUserLists(session.user.id);
 
