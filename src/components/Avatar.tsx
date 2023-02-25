@@ -1,7 +1,7 @@
-import Image from "next/image";
+import Image, { ImageProps } from "next/image";
 
 type AvatarProps = {
-  src: string;
+  src: ImageProps["src"];
   alt: string;
 };
 
@@ -13,7 +13,7 @@ export function Avatar({ src, alt, ...props }: AvatarProps) {
         src={src}
         width={50}
         height={50}
-        className="rounded-full"
+        className="rounded-full h-[50px] object-cover"
       />
     </div>
   );

@@ -1,5 +1,5 @@
 import { Avatar } from "./Avatar";
-import { BOT_AVATAR } from "../constants";
+import { BOT_AVATAR } from "src/constants";
 
 export function BotAvatar({ ...props }) {
   return (
