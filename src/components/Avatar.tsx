@@ -13,7 +13,7 @@ export function Avatar({ src, alt, ...props }: AvatarProps) {
         src={src}
         width={50}
         height={50}
-        className="rounded-full mr-6"
+        className="rounded-full"
       />
     </div>
   );
