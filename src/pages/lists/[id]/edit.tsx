@@ -27,11 +27,11 @@ export default function EditList({ draft }) {
   const router = useRouter();
 
   useEffect(() => {
-    saveDraft(draft.id, { title: debouncedTitle }).then(() => console.log("saved!"));
+    saveDraft(draft.id, { title: debouncedTitle });
   }, [draft.id, debouncedTitle]);
 
   useEffect(() => {
-    saveDraft(draft.id, { items: debouncedItems }).then(() => console.log("saved!"));
+    saveDraft(draft.id, { items: debouncedItems });
   }, [debouncedItems, draft.id]);
 
   useEffect(() => {
