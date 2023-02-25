@@ -76,7 +76,7 @@ export function CategoryPicker({
   return (
     <div className="flex flex-col">
       <StyledLabel>Categories</StyledLabel>
-      <ul className="mt-2 mb-4 flex flex-wrap gap-y-2">
+      <ul className="mt-2 mb-4 flex flex-wrap gap-y-2 w-96">
         {categoriesSelected.map((c) => (
           <li
             key={c}
