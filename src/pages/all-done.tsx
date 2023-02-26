@@ -26,8 +26,8 @@ export default function AllDone() {
   );
 }
 
-export async function getServerSideProps() {
-  const session = await getServerSession();
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const session = await getServerSession(ctx.req, ctx.res, authOptions);
   
   return {
     props: { session },
