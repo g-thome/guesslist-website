@@ -14,8 +14,7 @@ export default function AllDone() {
             <br />
             Your list was submitted to review. Once it passes, the bot will send
             you a DM if your Discord settings allow so. Meanwhile, you can also{" "}
-            <Link href="/my/drafts">
-              <a className="text-veryLightBlue">
+            <Link href="/my/drafts" className="text-veryLightBlue">
                 check the status of your lists.
               </a>
             </Link>
