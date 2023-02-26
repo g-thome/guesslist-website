@@ -1,12 +1,13 @@
 import { List, ListStatus } from "@prisma/client";
 import { GetServerSidePropsContext } from "next";
-import { AuthOptions, getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { createDraft, getUserLists } from "../../API";
+import { createDraft } from "../../API";
 import { Page } from "../../components/Page";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { Edit, BarChart } from "react-feather";
+import { getDraftsFromUser } from "src/db/list";
 
 type Props = {
   drafts: List[];
@@ -62,7 +63,7 @@ export async function getServerSideProps({
 }: GetServerSidePropsContext) {
   const session = await getServerSession(req, res, authOptions);
 
-  const drafts = await getUserLists(session.user.id);
+  const drafts = await getDraftsFromUser(session.user.id);
 
   return {
     props: {

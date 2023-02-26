@@ -70,3 +70,12 @@ export function submitToReview(id: string) {
     data: { status: ListStatus.IN_REVIEW }
   });
 }
+
+export function getDraftsFromUser(userId: string) {
+  return prisma.list.findMany({
+    where: {
+      authorId: userId,
+      status: ListStatus.DRAFT
+    }
+  });
+}
