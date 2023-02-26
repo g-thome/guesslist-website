@@ -1,7 +1,6 @@
-import { UserPlate } from "../../../components/UserPlate";
 import { Button } from "../../../components/Button";
 import { Page } from "../../../components/Page";
-import { getList, publishList } from "../../../API";
+import { getList, submitToReview } from "../../../API";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { getServerSession } from "next-auth";
@@ -89,7 +88,7 @@ export default function PreviewPage({ draft }) {
 
   async function handleClickDone() {
     try {
-      await publishList(session.user.id, draft);
+      await submitToReview(draft.id);
       router.push("/all-done");
     } catch (e) {
       alert(e.message);

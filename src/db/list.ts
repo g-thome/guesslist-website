@@ -63,3 +63,10 @@ export function updateList(id: string, data: Partial<List>) {
     data,
   });
 }
+
+export function submitToReview(id: string) {
+  return prisma.list.update({
+    where: { id },
+    data: { status: ListStatus.IN_REVIEW }
+  });
+}

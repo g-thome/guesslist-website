@@ -61,3 +61,7 @@ export async function saveDraft(listId: string, data: Partial<List>) {
   const response = await patch(`/list/${listId}`, data);
   return response.json();
 }
+
+export async function submitToReview(listId: string) {
+  return patch(`/list/${listId}/submit-to-review`, {});
+}

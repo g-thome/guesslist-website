@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import {
   createList,
-  getListById,
   getListByTitle,
   getListsByAuthor,
 } from "../../db/list";
@@ -18,9 +17,7 @@ export default function handler(
 
     try {
       if (req.method === "POST") {
-        const { authorId, title, categories, items, language } = JSON.parse(
-          req.body
-        );
+        const { authorId, title, categories, items, language } = req.body
         const { id } = await createList(authorId, {
           title,
           categories,
