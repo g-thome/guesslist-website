@@ -1,7 +1,10 @@
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { GetServerSidePropsContext } from "next/types";
 import { Page } from "../components/Page";
 import { UserPlate } from "../components/UserPlate";
+import { authOptions } from "src/pages/api/auth/[...nextauth]";
+
 
 export default function AllDone() {
   return (
@@ -16,7 +19,6 @@ export default function AllDone() {
             you a DM if your Discord settings allow so. Meanwhile, you can also{" "}
             <Link href="/my/drafts" className="text-veryLightBlue">
                 check the status of your lists.
-              </a>
             </Link>
           </p>
         </main>
