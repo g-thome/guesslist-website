@@ -12,7 +12,7 @@ export default function Sidebar() {
     { url: "/my/published", name: "published" },
   ];
   return (
-    <div className="flex flex-col justify-between h-screen px-4 pt-8 pb-4 bg-darkCharcoal">
+    <div className="flex flex-col justify-between h-screen px-4 pt-8 pb-4 bg-darkCharcoal min-w-max">
       <div className="text-spanishGray text-lg">
         <nav>
           <ul className="flex flex-col">
