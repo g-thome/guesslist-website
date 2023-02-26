@@ -97,8 +97,6 @@ export default function PreviewPage({ draft }) {
   }
 
   return (
-    <div className="p-8">
-      <UserPlate className="mb-4" />
       <Page title="Preview">
         <main className="flex gap-x-8">
           {Object.keys(HideLevel)
@@ -121,7 +119,6 @@ export default function PreviewPage({ draft }) {
           <Button type="button" value="Done" onClick={handleClickDone} />
         </div>
       </Page>
-    </div>
   );
 }
 
