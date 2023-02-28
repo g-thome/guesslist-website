@@ -3,9 +3,9 @@ import { GetServerSidePropsContext } from "next";
 import { getServerSession } from "next-auth";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { createDraft } from "../../API";
-import { Page } from "../../components/Page";
-import { authOptions } from "../api/auth/[...nextauth]";
+import { createDraft } from "src/API";
+import { Page } from "src/components/Page";
+import { authOptions } from "src/pages/api/auth/[...nextauth]";
 import { Edit, BarChart } from "react-feather";
 import { getDraftsFromUser } from "src/db/list";
 

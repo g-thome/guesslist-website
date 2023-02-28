@@ -6,10 +6,10 @@ export default function Sidebar() {
   const router = useRouter();
   const checkPathname = (path: string) => path === router.pathname;
   const pages = [
-    { url: "/my/drafts", name: "drafts" },
-    { url: "/my/waiting-review", name: "waiting-review" },
-    { url: "/my/needs-corrections", name: "needs-corrections" },
-    { url: "/my/published", name: "published" },
+    { url: "/drafts", name: "drafts" },
+    { url: "/waiting-review", name: "waiting-review" },
+    { url: "/needs-corrections", name: "needs-corrections" },
+    { url: "/published", name: "published" },
   ];
   return (
     <div className="flex flex-col justify-between h-screen px-4 pt-8 pb-4 bg-darkCharcoal min-w-max">
