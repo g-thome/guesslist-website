@@ -14,7 +14,7 @@ export default function Drafts({ lists }: Props) {
   return (
     <Page title="Waiting Review">
       {lists.length ? (
-        <ul className="text-white text-xl flex gap-8 items-baseline">
+        <ul className="text-white text-xl flex gap-8 items-baseline flex-wrap">
           {lists.map((l, idx) => (
             <li key={"list" + idx} className="flex">
               <div className="outline outline-1 outline-veryLightBlue rounded p-4">
