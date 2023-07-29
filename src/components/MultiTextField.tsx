@@ -80,7 +80,7 @@ export function MultiTextField({
   return (
     <label>
       <StyledLabel>{label}</StyledLabel>
-      <ol class="list-decimal text-white list-inside text-2xl">
+      <ol className="list-decimal text-white list-inside text-2xl">
         {items.map((i) => {
           return (
             <li>
