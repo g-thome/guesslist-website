@@ -24,6 +24,7 @@ model List {
   likes Like[]
   dislikes Dislike[]
   objection String?
+  reviewNotes String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

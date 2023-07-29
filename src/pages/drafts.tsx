@@ -1,4 +1,3 @@
-import { List, ListStatus } from "@prisma/client";
 import { GetServerSidePropsContext } from "next";
 import { getServerSession } from "next-auth";
 import { useSession } from "next-auth/react";
@@ -6,11 +5,11 @@ import { useRouter } from "next/router";
 import { createDraft } from "src/API";
 import { Page } from "src/components/Page";
 import { authOptions } from "src/pages/api/auth/[...nextauth]";
-import { Edit, BarChart } from "react-feather";
-import { getDraftsFromUser } from "src/db/list";
+import { Edit } from "react-feather";
+import { getDraftTitlesFromUser } from "src/db/list";
 
 type Props = {
-  drafts: List[];
+  drafts: Awaited<ReturnType<typeof getDraftTitlesFromUser>>;
 };
 export default function Drafts({ drafts }: Props) {
   const { data: session } = useSession();
@@ -32,9 +31,6 @@ export default function Drafts({ drafts }: Props) {
                 onClick={() => router.push(`/lists/${l.id}/edit`)}
                 className="text-veryLightBlue cursor-pointer inline ml-2"
               />{" "}
-              {l.status === ListStatus.PUBLISHED && (
-                <BarChart className="text-veryLightBlue cursor-pointer" />
-              )}
             </li>
           ))}
         </ul>
@@ -63,7 +59,7 @@ export async function getServerSideProps({
 }: GetServerSidePropsContext) {
   const session = await getServerSession(req, res, authOptions);
 
-  const drafts = await getDraftsFromUser(session.user.id);
+  const drafts = await getDraftTitlesFromUser(session.user.id);
 
   return {
     props: {

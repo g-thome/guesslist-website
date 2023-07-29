@@ -5,9 +5,10 @@ type ButtonProps = {
   className?: string;
   type: "button" | "submit";
   value: string;
+  disabled?: boolean
 };
 
-export const Button = ({ onClick, className, type, value }: ButtonProps) => {
+export const Button = ({ onClick, className, type, value, disabled }: ButtonProps) => {
   return (
     <input
       className={
@@ -17,6 +18,7 @@ export const Button = ({ onClick, className, type, value }: ButtonProps) => {
       onClick={onClick}
       type={type}
       value={value}
+      disabled={disabled}
     ></input>
   );
 };

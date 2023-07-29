@@ -4,47 +4,28 @@ import { getServerSession } from "next-auth";
 import { Page } from "src/components/Page";
 import { authOptions } from "src/pages/api/auth/[...nextauth]";
 import { CornerDownRight } from "react-feather";
-import { getWaitingReviewFromUser } from "src/db/list";
+import { getNeedsCorrectionsFromUser } from "src/db/list";
 import { Flag } from "src/components/Flag";
+import { ListCard } from "src/components/ListCard";
 
 type Props = {
   lists: List[];
 };
-export default function Drafts({ lists }: Props) {
+export default function NeedsCorrections({ lists }: Props) {
   return (
-    <Page title="Waiting Review">
+    <Page title="Needs Corrections">
       {lists.length ? (
         <ul className="text-white text-xl flex gap-8 items-baseline">
           {lists.map((l, idx) => (
             <li key={"list" + idx} className="flex">
-              <div className="outline outline-1 outline-veryLightBlue rounded p-4">
-                <div className="flex gap-x-8 text-2xl">
-                  <h2 className="font-bold">{l.title}</h2>
-                  <Flag language={l.language} />
-                </div>
-                <ul>
-                  {l.items.map((i) => (
-                    <li key={`${l.title}-${i}`}>
-                      <CornerDownRight className="inline mr-1" />
-                      <span>{i}</span>
-                    </li>
-                  ))}
-                </ul>
-                <ul className="flex justify-end">
-                  {l.categories.map((c) => (
-                    <li className="text-base" key={`${l.title}-c-${c}`}>
-                      #{c}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <ListCard list={l} editable onEditClick={() => console.log("clicked")}/>
             </li>
           ))}
         </ul>
       ) : (
         <div>
           <p className="text-white">
-            There are not lists waiting review.
+            There are no lists that need corrections.
           </p>
         </div>
       )}
@@ -58,7 +39,7 @@ export async function getServerSideProps({
 }: GetServerSidePropsContext) {
   const session = await getServerSession(req, res, authOptions);
 
-  const lists = await getWaitingReviewFromUser(session.user.id);
+  const lists = await getNeedsCorrectionsFromUser(session.user.id);
 
   return {
     props: {

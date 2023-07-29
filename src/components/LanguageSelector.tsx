@@ -23,6 +23,7 @@ const languages = [
   "malay",
   "norwegian",
   "polish",
+  "portuguese",
   "punjabi",
   "romanian",
   "russian",
@@ -54,7 +55,7 @@ export function LanguageSelector({
           onSelect(evt.currentTarget.value)
         }
         value={initialValue}
-        className="mt-0.5 py-4 px-8 w-fit border-0 rounded-full bg-arsenic outline-0 text-white text-2xl cursor-pointer"
+        className="mt-4 py-4 px-8 w-fit border-0 rounded-full bg-arsenic outline-0 text-white text-2xl cursor-pointer"
       >
         {languages.map((l) => (
           <option key={l} value={l}>

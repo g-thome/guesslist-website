@@ -80,18 +80,22 @@ export function MultiTextField({
   return (
     <label>
       <StyledLabel>{label}</StyledLabel>
-      {items.map((i) => {
-        return (
-          <TextField
-            onChange={onItemChange}
-            autoFocus
-            key={i.itemId}
-            id={i.itemId}
-            onKeyDown={keyDown}
-            value={i.text}
-          />
-        );
-      })}
+      <ol class="list-decimal text-white list-inside text-2xl">
+        {items.map((i) => {
+          return (
+            <li>
+              <TextField
+                onChange={onItemChange}
+                autoFocus
+                key={i.itemId}
+                id={i.itemId}
+                onKeyDown={keyDown}
+                value={i.text}
+              />
+            </li>
+          );
+        })}
+      </ol>
       <PlusCircle
         fontSize="large"
         onClick={addField}

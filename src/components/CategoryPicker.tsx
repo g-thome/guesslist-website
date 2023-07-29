@@ -76,24 +76,26 @@ export function CategoryPicker({
   return (
     <div className="flex flex-col">
       <StyledLabel>Categories</StyledLabel>
-      <ul className="mt-2 mb-4 flex flex-wrap gap-y-2 w-96">
-        {categoriesSelected.map((c) => (
-          <li
-            key={c}
-            data-value={c}
-            onClick={(evt) =>
-              setCategoriesSelected(
-                categoriesSelected.filter(
-                  (c) => c !== evt.currentTarget.dataset.value
+      {!!categoriesSelected.length && (
+        <ul className="mt-2 flex flex-wrap gap-y-2 w-96">
+          {categoriesSelected.map((c) => (
+            <li
+              key={c}
+              data-value={c}
+              onClick={(evt) =>
+                setCategoriesSelected(
+                  categoriesSelected.filter(
+                    (c) => c !== evt.currentTarget.dataset.value
+                  )
                 )
-              )
-            }
-            className="text-arsenic bg-gray px-2 py-1 rounded text-center mr-1 inline cursor-pointer hover:bg-red hover:text-white select-none"
-          >
-            #{c}
-          </li>
-        ))}
-      </ul>
+              }
+              className="text-arsenic bg-gray px-2 py-1 rounded text-center mr-1 inline cursor-pointer hover:bg-red hover:text-white select-none"
+            >
+              #{c}
+            </li>
+          ))}
+        </ul>
+      )}
       <div className="relative">
         <div onClick={focus} className=" relative">
           <input
@@ -102,7 +104,7 @@ export function CategoryPicker({
             onKeyDown={keyDown}
             type="text"
             value={text}
-            className="border-0 outline-0 inline mt-0.5 py-4 px-8 w-full rounded-full bg-arsenic text-white text-2xl cursor-text focus:outline focus:outline-white focus:outline-2"
+            className="border-0 outline-0 inline mt-4 py-4 px-8 w-full rounded-full bg-arsenic text-white text-2xl cursor-text focus:outline focus:outline-white focus:outline-2"
           ></input>
         </div>
         {suggestions.length > 0 && (

@@ -80,11 +80,42 @@ export function getDraftsFromUser(userId: string) {
   });
 }
 
+export function getDraftTitlesFromUser(userId: string) {
+  return prisma.list.findMany({
+    where: {
+      authorId: userId,
+      status: ListStatus.DRAFT
+    },
+    select: {
+      id: true,
+      title: true,
+    }
+  })
+}
+
 export function getWaitingReviewFromUser(userId: string) {
   return prisma.list.findMany({
     where: {
       authorId: userId,
       status: ListStatus.IN_REVIEW
+    }
+  });
+}
+
+export function getNeedsCorrectionsFromUser(userId: string) {
+  return prisma.list.findMany({
+    where: {
+      authorId: userId,
+      status: ListStatus.NEEDS_CORRECTIONS
+    }
+  });
+}
+
+export function getPublishedFromUser(userId: string) {
+  return prisma.list.findMany({
+    where: {
+      authorId: userId,
+      status: ListStatus.PUBLISHED
     }
   });
 }
