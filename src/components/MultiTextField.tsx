@@ -62,9 +62,12 @@ export function MultiTextField({
           .map((i) => i.text)
       );
       setItems(items.filter((i) => i.itemId !== evt.currentTarget.id));
-      const previous =
-        items.findIndex((i) => i.itemId === evt.currentTarget.id) - 1;
-      setFocusItemId(items[previous].itemId);
+      const previous = items[items.findIndex((i) => i.itemId === evt.currentTarget.id) - 1];
+
+      if (previous) return setFocusItemId(previous.itemId);
+
+      const next = items[items.findIndex((i) => i.itemId === evt.currentTarget.id) + 1];
+      setFocusItemId(next.itemId);
     }
   }
 
