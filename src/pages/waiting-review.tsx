@@ -30,7 +30,7 @@ export default function Drafts({ lists }: Props) {
                     </li>
                   ))}
                 </ul>
-                <ul className="flex justify-end">
+                <ul className="flex justify-end gap-x-2">
                   {l.categories.map((c) => (
                     <li className="text-base" key={`${l.title}-c-${c}`}>
                       #{c}
