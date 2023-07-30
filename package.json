@@ -38,5 +38,8 @@
     "react-dom": "^18.2.0",
     "react-feather": "^2.0.10",
     "swr": "^2.0.3"
+  },
+  "prisma": {
+    "schema": "src/db/schema.prisma"
   }
 }
