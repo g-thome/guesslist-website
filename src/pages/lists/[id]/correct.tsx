@@ -1,18 +1,18 @@
 
-import { Button } from "../../../components/Button";
-import { TextField } from "../../../components/TextField";
-import { MultiTextField } from "../../../components/MultiTextField";
-import { CategoryPicker } from "../../../components/CategoryPicker";
-import { LanguageSelector } from "../../../components/LanguageSelector";
-import { Page } from "../../../components/Page";
-import { StyledLabel } from "../../../components/StyledLabel";
+import { Button } from "src/components/Button";
+import { TextField } from "src/components/TextField";
+import { MultiTextField } from "src/components/MultiTextField";
+import { CategoryPicker } from "src/components/CategoryPicker";
+import { LanguageSelector } from "src/components/LanguageSelector";
+import { Page } from "src/components/Page";
+import { StyledLabel } from "src/components/StyledLabel";
 import { useRouter } from "next/router";
 import { GetServerSidePropsContext } from "next";
-import { getList, saveDraft } from "../../../API";
+import { getList, saveDraft } from "src/API";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../api/auth/[...nextauth]";
+import { authOptions } from "src/pages/api/auth/[...nextauth]";
 import { useEffect, useState } from "react";
-import { useDebounce } from "../../../hooks/useDebounce";
+import { useDebounce } from "src/hooks/useDebounce";
 
 export default function EditList({ draft }) {
   const [title, setTitle] = useState(draft.title);

@@ -1,6 +1,6 @@
 import { SessionProvider } from "next-auth/react";
-import "../index.css";
-import { GlobalState } from "../context/GlobalState";
+import "src/index.css";
+import { GlobalState } from "src/context/GlobalState";
 import Head from "next/head";
 
 export default function MyApp({

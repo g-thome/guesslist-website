@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { createDraft } from "../../db/list";
+import { createDraft } from "src/db/list";
 
 export default function handler(
   req: NextApiRequest,

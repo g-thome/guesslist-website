@@ -1,12 +1,12 @@
-import { Button } from "../../../components/Button";
-import { Page } from "../../../components/Page";
-import { getList, submitToReview } from "../../../API";
+import { Button } from "src/components/Button";
+import { Page } from "src/components/Page";
+import { getList, submitToReview } from "src/API";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import { GetServerSidePropsContext } from "next";
-import { authOptions } from "../../api/auth/[...nextauth]";
-import { BotAvatar } from "../../../components/BotAvatar";
+import { authOptions } from "src/pages/api/auth/[...nextauth]";
+import { BotAvatar } from "src/components/BotAvatar";
 
 const asteriskify = (str: string) => "*".repeat(str.length);
 const hashtagify = (list: string[]) => "#" + list.join(" #");

@@ -1,9 +1,9 @@
 import { useState, useEffect, KeyboardEvent, ChangeEvent } from "react";
 import { PlusCircle } from "react-feather";
-import { keygen } from "../keygen";
+import { keygen } from "src/keygen";
 import { StyledLabel } from "./StyledLabel";
 import { TextField } from "./TextField";
-import { useDidUpdateEffect } from "../hooks/useDidUpdate";
+import { useDidUpdateEffect } from "src/hooks/useDidUpdate";
 
 interface IItemListItem {
   text: string;

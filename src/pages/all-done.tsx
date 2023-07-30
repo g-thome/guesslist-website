@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { GetServerSidePropsContext } from "next/types";
-import { Page } from "../components/Page";
+import { Page } from "src/components/Page";
 import { authOptions } from "src/pages/api/auth/[...nextauth]";
 
 

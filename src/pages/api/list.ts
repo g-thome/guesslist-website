@@ -3,7 +3,7 @@ import {
   createList,
   getListByTitle,
   getListsByAuthor,
-} from "../../db/list";
+} from "src/db/list";
 
 export default function handler(
   req: NextApiRequest,

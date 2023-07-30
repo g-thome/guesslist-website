@@ -1,7 +1,7 @@
 import { ChangeEvent, useState, KeyboardEvent } from "react";
-import { useDidUpdateEffect } from "../hooks/useDidUpdate";
+import { useDidUpdateEffect } from "src/hooks/useDidUpdate";
 import { StyledLabel } from "./StyledLabel";
-import { ALLOWED_CATEGORIES } from "../constants";
+import { ALLOWED_CATEGORIES } from "src/constants";
 
 type CategoryPickerProps = {
   initialValue?: string[];

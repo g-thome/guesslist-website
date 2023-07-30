@@ -1,5 +1,5 @@
-import { prisma } from "./prisma";
-import { IDraft } from "../types";
+import { prisma } from "src/db/prisma";
+import { IDraft } from "src/types";
 import { List, ListStatus } from "@prisma/client";
 
 export function createList(authorId: string, list: IDraft) {

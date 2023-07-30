@@ -2,7 +2,7 @@ import { Page } from "src/components/Page";
 import { GetServerSidePropsContext } from "next";
 import { getList } from "src/API";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../api/auth/[...nextauth]";
+import { authOptions } from "src/pages/api/auth/[...nextauth]";
 import { TextField } from "src/components/TextField";
 import { MultiTextField } from "src/components/MultiTextField";
 import { CategoryPicker } from "src/components/CategoryPicker";

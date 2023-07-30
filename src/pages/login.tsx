@@ -1,7 +1,7 @@
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
-import DiscordLogo from "../../public/discord-logo.svg";
+import DiscordLogo from "src/public/discord-logo.svg";
 
 export default function Login() {
   return (

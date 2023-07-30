@@ -1,4 +1,4 @@
-import { Avatar } from "./Avatar";
+import { Avatar } from "src/components/Avatar";
 import { BOT_AVATAR } from "src/constants";
 
 export function BotAvatar({ ...props }) {

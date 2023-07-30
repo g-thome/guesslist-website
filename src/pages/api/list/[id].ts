@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { ALLOWED_CATEGORIES } from "../../../constants";
-import { getListById, updateList } from "../../../db/list";
+import { ALLOWED_CATEGORIES } from "src/constants";
+import { getListById, updateList } from "src/db/list";
 
 export default function handler(
   req: NextApiRequest,

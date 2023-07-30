@@ -4,8 +4,8 @@ import {
   DISCORD_CLIENT_ID,
   DISCORD_CLIENT_SECRET,
   DISCORD_API_USER_INFO,
-} from "../../../constants";
-import { IDiscordAPIUser } from "../../../types";
+} from "src/constants";
+import { IDiscordAPIUser } from "src/types";
 
 export const authOptions: NextAuthOptions = {
   providers: [
