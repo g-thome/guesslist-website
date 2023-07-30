@@ -17,13 +17,12 @@ export default function Sidebar() {
         <nav>
           <ul className="flex flex-col">
             {pages.map((p) => (
-              <Link href={p.url}>
+              <Link href={p.url} key={p.name}>
                 <li
                   className={`cursor-pointer py-1 px-2 rounded mb-1 ${
                     checkPathname(p.url) && "text-white"
                   } ${checkPathname(p.url) && "bg-outerSpace"}
                   ${!checkPathname(p.url) && "hover:bg-arsenic"}`}
-                  key={p.name}
                 >
                     <span># {p.name}</span>
                 </li>

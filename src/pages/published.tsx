@@ -42,7 +42,7 @@ export default function Published() {
         <ul className="text-white text-xl">
           {lists.map(l => (
             // @ts-ignore
-            <ListCard list={l} editable onEditClick={editClick} />
+            <ListCard list={l} editable onEditClick={editClick} key={`card-${l.id}`} />
           ))}
         </ul>
       ) : (

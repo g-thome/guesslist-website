@@ -86,7 +86,7 @@ export function MultiTextField({
       <ol className="list-decimal text-white list-inside text-2xl">
         {items.map((i) => {
           return (
-            <li>
+            <li key={`multitext-${i}`}>
               <TextField
                 onChange={onItemChange}
                 autoFocus
